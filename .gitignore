@@ -1,0 +1,6 @@
+results
+*.gnucash
+__pycache__
+oldstuff
+Docyfile
+docs
