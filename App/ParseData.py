@@ -1,3 +1,8 @@
+##
+# @file
+# Parses data from GNUCash XML object to be passed to Create CSV.
+#
+
 from datetime import datetime, date
 
 from App.AccountPaths import AccountPaths
@@ -8,13 +13,14 @@ from App.AccountPaths import AccountPaths
 class ParseData():
 
     ## Parse Data Constructor
-    # @param    GNUCashXML      GNUCash XML parsed by ElementTree.
-    # @param    namespaces      Namespaces used in GNUCash XML.
-    # @param    assetBalanceObj Contains accounts and display options.
+    # @param    GNUCashXML  [object]    GNUCash XML parsed by ElementTree.
+    # @param    namespaces  [object]    Namespaces used in GNUCash XML.
+    # @param    options     [object]    Options from config file.
+    # @param    verbose     [boolean]   Prints status when true.
     def __init__(self, GNUCashXML, namespaces, options, verbose):
 
         if (verbose):
-            print("  Parsing Data")
+            print("    Parsing Data")
 
         self.GNUCashXML = GNUCashXML
         self.ns         = namespaces
@@ -48,8 +54,8 @@ class ParseData():
     ## Create a list of transactions limited between dates.
     # @param    startDate       Beginning date for transaction window.
     # @param    endDate         Ending date for transaction window.
-    # @param    window          Optional, if false the transaction window is from teh beginning of
-    #                           the GNUCash file to the end date and the start date is ignored.
+    # @param    window          Optional, if false the start date is ignored and the  transaction
+    #                           window is from the beginning of the GNUCash file to the end date.
     # @return                   Returns the transctions as a list of xml objects.
     def limitTransactions(self, startDate, endDate, window = True):
 
@@ -112,8 +118,8 @@ class ParseData():
 
 
     ## Find commodity id for an account.
-    # @param    accountId       GUID of account to get commodities of.
-    # @return                   String of this account's commodity name.
+    # @param    accountId   [string]    GUID of account to get commodities of.
+    # @return               [string]    This account's commodity name.
     def getCommodityId(self, accountId):
         # <gnc:account version="2.0.0">
         #     <act:name>FXNAX</act:name>
@@ -134,11 +140,10 @@ class ParseData():
         return commodityId.text
 
 
-    ## Find commodity's user defined symbol (what is displayed instead of $).
+    ## Find commodity's namespace and user defined symbol (what is displayed instead of $).
     # @param    commodityId     GUID of commodity.
-    # @return                   String for this commodities symbol.
-    def getCommoditySymbol(self, commodityId):
-        # Example commodity
+    # @return                   Tuple of Strings for this commodities namespace and symbol.
+    def getCommodityData(self, commodityId):
         # <gnc:commodity version="2.0.0">
         #     <cmdty:space>NYSE</cmdty:space>
         #     <cmdty:id>GPC</cmdty:id>
@@ -152,20 +157,26 @@ class ParseData():
         #     </cmdty:slots>
         # </gnc:commodity>
 
-        commondityEl    = self.GNUCashXML.find(".//gnc:commodity[cmdty:id='{}']".format(commodityId), self.ns)
-        commoditySlotsEl = commondityEl.find('./cmdty:slots/slot', self.ns)
+        namespace = None
+        symbol    = None
+
+        commodityEl     = self.GNUCashXML.find(".//gnc:commodity[cmdty:id='{}']".format(commodityId), self.ns)
+        commoditySlotsEl = commodityEl.find('./cmdty:slots/slot', self.ns)
+
+        if commodityEl:
+            namespace = commodityEl.find('./cmdty:space', self.ns).text
 
         # Not all commodities have slots
         if commoditySlotsEl:
-            return commoditySlotsEl.find('./slot:value', self.ns).text
-        else:
-            return None
+            symbol = commoditySlotsEl.find('./slot:value', self.ns).text
+
+        return namespace, symbol
 
 
     ## Gets commodity value cloest to end date without going into the future.
     # @param    commodityId     GUID of commodity.
     # @param    endDate         The commodity price closest to this date without going past it.
-    # @return                   First, commodity value as a float. Second, the date of the commodity
+    # @return                   Tuple of commodity value First, commodity value as a float. Second, the date of the commodity
     #                           value as a datetime object.
     def getCommodityValue(self, commodityId, endDate):
 
@@ -201,7 +212,7 @@ class ParseData():
     # @param    accountId       Account Id as a string of account to build report object for.
     # @param    transctions     The list of limited transactions for a set of dates in the report.
     # @param    endDate         The commodity price closest to this date without going past it.
-    # @param    level           Current depth account is at realative to accountId given.
+    # @param    level           Optional, current depth account is at realative to accountId given.
     # @return                   Report data object with initial account information.
     def buildReportData(self, accountId, transctions, endDate, level = 0):
 
@@ -214,17 +225,18 @@ class ParseData():
             children[childId] = self.buildReportData(childId, transctions, endDate, level + 1)
 
         # Setup elements for this report data object.
-        name                               = accountEl.find('./act:name', self.ns).text
-        value, quantity                    = self.sumTransactionsForAccount(accountId, transctions) # value and quantity from gnucash xml
-        commodityId                        = self.getCommodityId(accountId)
-        commoditySymbol                    = self.getCommoditySymbol(commodityId)
-        commodityValue, commodityValueDate = self.getCommodityValue(commodityId, endDate)
+        name                                = accountEl.find('./act:name', self.ns).text
+        value, quantity                     = self.sumTransactionsForAccount(accountId, transctions) # value and quantity from gnucash xml
+        commodityId                         = self.getCommodityId(accountId)
+        commodityNamespace, commoditySymbol = self.getCommodityData(commodityId)
+        commodityValue, commodityValueDate  = self.getCommodityValue(commodityId, endDate)
 
         # Commodity information object.
-        commodity = {'id'    : commodityId,         # What is this account made of?
-                     'symbol': commoditySymbol,     # Display symbol of commodity.
-                     'value' : commodityValue,      # Commodity value at commodityValueDate.
-                     'date'  : commodityValueDate}  # Date used to determine commodity Value
+        commodity = {'id'        : commodityId,         # What is this account made of?
+                     'namespace' : commodityNamespace,  # Category for this commodity.
+                     'symbol'    : commoditySymbol,     # Display symbol of commodity.
+                     'value'     : commodityValue,      # Commodity value at commodityValueDate.
+                     'date'      : commodityValueDate}  # Date used to determine commodity Value
 
         # Add new object for each account in report.
         return {'name'      : name,                 # Human readable name.

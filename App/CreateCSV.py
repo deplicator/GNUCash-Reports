@@ -1,18 +1,23 @@
+##
+# @file
+# Creates CSV for generic reports.
+#
+
 import csv
 
-## Summary
-# Writes Asset Balance Reports to a CSV file.
+## Create CSV
+# Creates a CSV report from a ParseData object.
 class CreateCSV():
 
-    ## Asset Balance Constructor
-    # @param    reports         A list of reports to create summary of.
-    # @param    outputFile      Where to put the results.
-    # @param    displayOpts     Display options object.
-    # @param    verbose         Print out some things if true.
-    def __init__(self, reportObj, options, verbose):
+    ## Create CSV Constructor.
+    # @param    reportObj       A list of reports to create summary of (output of ParseData).
+    # @param    options         Options from config file.
+    # @param    verbose         Prints status when true.
+    def __init__(self, reportObj, options, verbose = False):
+        self.verbose = verbose
 
-        if (verbose):
-            print("  Creating CSV")
+        if (self.verbose):
+            print("    Creating {} CSV".format(options.ReportType))
 
         self.reports    = reportObj.report
         self.outputFile = options.OutputFile
@@ -24,8 +29,8 @@ class CreateCSV():
     ## Get header for single report
     # Reports will usually have the same headers, but not always. Reconsiling the headers will allow
     # for leaving an account blank for a report where it didn't exist.
-    # @param    report
-    # @param    headers
+    # @param        report      Data from report.
+    # @param[out]   headers     Headers to be created.
     def getReportHeader(self, report, headers):
 
         # Loop through each account in report.
@@ -44,8 +49,10 @@ class CreateCSV():
                     self.getReportHeader(report[account]['children'], headers)
 
 
-    ##
-    #
+    ## Recursively sum total for single report
+    # @param    report          Data from report.
+    # @param    headers         Headers for report.
+    # @param    row             I don't remember..
     def getTotals(self, report, headers, row):
 
         # Loop through each account in report.
@@ -66,7 +73,7 @@ class CreateCSV():
                 row[index] = accountdata['totalAccount']
 
 
-    ## Creates Summary of Asset Balance reports.
+    ## Creates Summary of reports.
     def createSummary(self):
 
         #
