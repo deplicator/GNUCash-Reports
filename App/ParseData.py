@@ -1,6 +1,6 @@
 ##
 # @file
-# Parses data from GNUCash XML object to be passed to Create CSV.
+# Parses data from GNUCash XML object to be passed to CreateCSV class.
 #
 
 from datetime import datetime, date
@@ -9,14 +9,14 @@ from App.AccountPaths import AccountPaths
 
 
 ## Parse Data
-# Turns GNUCashXML and options object into a useable data structure.
+# @brief Turns GNUCashXML and options object into a data structure.
 class ParseData():
 
-    ## Parse Data Constructor
-    # @param    GNUCashXML  [object]    GNUCash XML parsed by ElementTree.
-    # @param    namespaces  [object]    Namespaces used in GNUCash XML.
-    # @param    options     [object]    Options from config file.
-    # @param    verbose     [boolean]   Prints status when true.
+    ## Constructor
+    # @param[in]    GNUCashXML          **Object**, GNUCash XML parsed by ElementTree.
+    # @param[in]    namespaces          **Object**, namespaces used in GNUCash XML.
+    # @param[in]    options             **Object**, options from config file.
+    # @param[in]    verbose             **Optional Boolean**, prints status when true.
     def __init__(self, GNUCashXML, namespaces, options, verbose):
 
         if (verbose):
@@ -52,11 +52,12 @@ class ParseData():
 
 
     ## Create a list of transactions limited between dates.
-    # @param    startDate       Beginning date for transaction window.
-    # @param    endDate         Ending date for transaction window.
-    # @param    window          Optional, if false the start date is ignored and the  transaction
-    #                           window is from the beginning of the GNUCash file to the end date.
-    # @return                   Returns the transctions as a list of xml objects.
+    # @param[in]    startDate       **DateTime Object**, beginning date for transaction window.
+    # @param[in]    endDate         **DateTime Object**, ending date for transaction window.
+    # @param[in]    window          **Optional Boolean**, if false the start date is ignored and the
+    #                               transaction window is from the beginning of the GNUCash file to
+    #                               the end date.
+    # @return                       **List** of XML object transactions between given dates.
     def limitTransactions(self, startDate, endDate, window = True):
 
         transactions = []
@@ -85,9 +86,10 @@ class ParseData():
 
     ## Sums transactions value and quantity for given account id.
     # Uses subset of transaction limited by end date.
-    # @param    accountId       GUID of account to sum transactions for.
-    # @param    transctions     The list of limited transactions to get the sum of.
-    # @return                   First for sum of account's value, second for quantity. Both floats.
+    # @param[in]    accountId       **String**, GUID of account to sum transactions for.
+    # @param[in]    transctions     **List**, Transasctions to get the sum of.
+    # @return                       **Tuple**; First element is sum of account's value, second for
+    #                               quantity. Both floats.
     def sumTransactionsForAccount(self, accountId, transactions):
 
         # Return's to calculate.
@@ -118,8 +120,8 @@ class ParseData():
 
 
     ## Find commodity id for an account.
-    # @param    accountId   [string]    GUID of account to get commodities of.
-    # @return               [string]    This account's commodity name.
+    # @param[in]    accountId       **String**, GUID of account to sum transactions for.
+    # @return                       **String** of this account's commodity name.
     def getCommodityId(self, accountId):
         # <gnc:account version="2.0.0">
         #     <act:name>FXNAX</act:name>
@@ -141,8 +143,8 @@ class ParseData():
 
 
     ## Find commodity's namespace and user defined symbol (what is displayed instead of $).
-    # @param    commodityId     GUID of commodity.
-    # @return                   Tuple of Strings for this commodities namespace and symbol.
+    # @param[in]    commodityId     **String**, GUID of commodity.
+    # @return                       **Tuple** of Strings for this commodities namespace and symbol.
     def getCommodityData(self, commodityId):
         # <gnc:commodity version="2.0.0">
         #     <cmdty:space>NYSE</cmdty:space>
@@ -174,10 +176,11 @@ class ParseData():
 
 
     ## Gets commodity value cloest to end date without going into the future.
-    # @param    commodityId     GUID of commodity.
-    # @param    endDate         The commodity price closest to this date without going past it.
-    # @return                   Tuple of commodity value First, commodity value as a float. Second, the date of the commodity
-    #                           value as a datetime object.
+    # @param[in]    commodityId     **String**, GUID of commodity.
+    # @param[in]    endDate         **DateTime Object**, get the commodity price closest to this
+    #                               date without going past it.
+    # @return                       **Tuple** First element is commodity value as a float. Second is
+    #                               the date of the commodity value as a datetime object.
     def getCommodityValue(self, commodityId, endDate):
 
         # Returns to calculate.
@@ -207,13 +210,14 @@ class ParseData():
 
 
     ## Build the intial report data object.
-    # Populates the necessary elements of the top level results, recursively calls itself for
-    # children. Calculates everything except values.
-    # @param    accountId       Account Id as a string of account to build report object for.
-    # @param    transctions     The list of limited transactions for a set of dates in the report.
-    # @param    endDate         The commodity price closest to this date without going past it.
-    # @param    level           Optional, current depth account is at realative to accountId given.
-    # @return                   Report data object with initial account information.
+    # @brief Populates the necessary elements of the top level results, recursively calls itself for
+    #        children. Calculates everything except values, this is done in calculateTotals().
+    # @param[in]    accountId       **String**, GUID of account to sum transactions for.
+    # @param[in]    transctions     **List**, Transasctions for a set of dates in the report.
+    # @param[in]    endDate         **DateTime Object**, used to getCommodityValue().
+    # @param[in]    level           **Optional Integer**, current depth account is at realative to
+    #                               accountId given.
+    # @return                       **Dictonary**, report data with initial account information.
     def buildReportData(self, accountId, transctions, endDate, level = 0):
 
         accountEl = self.GNUCashXML.find(".//gnc:account[act:id='{}']".format(accountId), self.ns)
@@ -249,8 +253,9 @@ class ParseData():
 
 
     ## Total up sums of child accounts.
-    # Recursivly get sums from children accounts, when account has no child just copy sum to total.
-    # @param    reportData      needed to pass at this level so it can update totals.
+    # @brief Recursivly get sums from children accounts, when account has no child just copy sum to
+    #        total.
+    # @param[in]    reportData      **Dictonary** report data for children accounts.
     def calculateTotals(self, reportData):
 
         # Total up sums of children if it has children.
@@ -277,9 +282,9 @@ class ParseData():
 
 
     ## Build out the report object.
-    # @param    transctions     The list of limited transactions for a set of dates in the report.
-    # @param    endDate         The commodity price closest to this date without going past it.
-    # @return                   Report data object.
+    # @param[in]    transctions     **List**, Transasctions for a set of dates in the report.
+    # @param[in]    endDate         **DateTime Object**, used to getCommodityValue().
+    # @return                       **Dictonary** data for report.
     def buildReport(self, transctions, endDate):
 
         row = {}

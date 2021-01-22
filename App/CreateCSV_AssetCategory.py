@@ -1,25 +1,25 @@
 ##
 # @file
-# Creates CSV for Asset Category report, it's a little different than the generic reports.
+# Creates CSV file for Asset Category report, it's a little different than the generic reports.
 #
 
 import csv
 
 ## Create CSV - Asset Category
-# @brief The intent of this report will give the current value of assets for Stocks, Bonds, Bullion,
-#        etc... This will create a CSV file with rows for date range and columns for category. The
-#        column headers are determined using GNUCash's security namespaces, so it will require those
-#        to be set up correctly in GNUCash.
+# @brief The intent of this report is to give the current value of assets per category (Stocks,
+#        Bonds, Bullion, etc...). This will create a CSV file with rows for date range and columns
+#        for category. The column headers are determined using GNUCash's security namespaces, so it
+#        will require those to be set up in GNUCash.
 class CreateCSV_AssetCategory():
 
-    ## Constructor for CreateCSV_AssetCategory Class.
-    # @param[in]    GNUCashXML          Object, GNUCash XML parsed by ElementTree, needed to get
+    ## Constructor
+    # @param[in]    GNUCashXML          **Object**, GNUCash XML parsed by ElementTree, needed to get
     #                                   list of security namespaces.
-    # @param[in]    XMLnamespaces       Namespaces used in GNUCash XML, not to be confused with
-    #                                   security namespaces.
-    # @param[in]    assetBalanceReport  List, Asset Balance Report from ParseData.
-    # @param[in]    options             Object, options from config file.
-    # @param[in]    [verbose]           Boolean, prints status when true.
+    # @param[in]    XMLnamespaces       **Object**, namespaces used in GNUCash XML, not to be
+    #                                   confused swith ecurity namespaces.
+    # @param[in]    assetBalanceReport  **List**, Asset Balance Report from ParseData.
+    # @param[in]    options             **Object**, options from config file.
+    # @param[in]    verbose             **Optonal Boolean**, prints status when true.
     def __init__(self, GNUCashXML, XMLnamespaces, assetBalanceReport, options, verbose = False):
 
         self.verbose = verbose
@@ -36,14 +36,17 @@ class CreateCSV_AssetCategory():
         self.columns = self.createHeaders()
         self.rows    = self.createRows()
 
+        # Call sumRowTotals for each date range.
         for report in self.reports:
             self.sumRowTotals(report)
 
         self.createFile()
 
 
-    ## Creates a dictonary with categories from GNUCash's security namespaces as keys and float as
-    # values. A copy will be added for each row.
+    ## Parse categoeis from GNUCash XML.
+    # @brief Creates a dictonary with categories from GNUCash's security namespaces as keys and
+    #        float as values. A copy will be added for each row (date range).
+    # @return                       **Dictonary** of categories to use as headers.
     def createHeaders(self):
         if (self.verbose):
             print("      Creating categoris from security namespaces.")
@@ -59,8 +62,10 @@ class CreateCSV_AssetCategory():
         return categories
 
 
-    ## A row is made for each end date defined in the report (indexed as string with format
-    # "yyyy-mm-dd"). It will contain a copy of the self.columns dictionary from createHeaders.
+    ## Setup rows from end date.
+    # @brief A row is made for each end date defined in the report (indexed as string with format
+    #        "yyyy-mm-dd"). Each has a copy of the self.columns dictionary from createHeaders().
+    # @return                       **Dictonary** of rows by date.
     def createRows(self):
         rows = {}
 
@@ -71,8 +76,11 @@ class CreateCSV_AssetCategory():
         return rows
 
 
-    ## Adds an account's total to the correct category. Recursively calls again if that account has
-    # children.
+    ## Sums accounts by category for the give date.
+    # @brief Adds the given account's total to the correct category. Recursively calls again if that
+    #        account has children.
+    # @param[in]    dateIndex           **String**, date to use as index format "yyyy-mm-dd".
+    # @param[in]    account             **Object**, account to sum.
     def addAccountTotalsToCategory(self, dateIndex, account):
         category = account['commodity']['namespace']
         ammount  = account['total']
@@ -83,8 +91,11 @@ class CreateCSV_AssetCategory():
             self.addAccountTotalsToCategory(dateIndex, account['children'][child])
 
 
-    ## Sums accounts by category for a date.
+    ## Sums accounts by category for single report (date range).
+    # @brief Calls addAccountTotalsToCategory for each date range.
+    # @param[in]    singleReport        **Object**, element of assetBalanceReport.
     def sumRowTotals(self, singleReport):
+        # Converted to stirng so it looks nice in the CSV.
         dateIndex = singleReport['endDate'].strftime("%Y-%m-%d")
 
         if (self.verbose):

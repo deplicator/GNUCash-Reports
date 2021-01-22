@@ -1,25 +1,33 @@
-## Account Paths
+##
+# @file
+# AccountPaths class.
 #
+
+
+## Account Paths
+# @brief Creates an obeject of verified account paths at .pathsByGUID from the list of account paths
+#        strings passed in. Only tested with default GNUCash path seperatros.
 class AccountPaths():
 
-    ## Asset Balance Constructor
-    # @param    GNUCashXML      GNUCash XML parsed by ElementTree.
-    # @param    namespaces      Namespaces used in GNUCash XML.
-    # @param    accounts        List of strings representing GNUCash account paths.
+    ## Constructor
+    # @param[in]    GNUCashXML      **Object**, GNUCash XML parsed by ElementTree.
+    # @param[in]    namespaces      **Object**, namespaces used in GNUCash XML.
+    # @param[in]    accounts        **List** of strings representing GNUCash account paths.
     def __init__(self, GNUCashXML, namespaces, accounts):
         self.GNUCashXML   = GNUCashXML
         self.ns           = namespaces
         self.accounts     = accounts
 
-        self.verified    = False
+        self.verified    = False                # Set to true when paths are good.
         self.pathsByGUID = self.verifyPaths()
 
 
     ## Verifies a single path string.
-    # Expects path as string with account names seperated by colon.
-    # Example "Assets:Current Assets:Savings"
-    # @param    path            String of account names.
-    # @return                   List of account GUIDs for each account in path, in element order for given path.
+    # @brief Expects path as string with account names seperated by colon.
+    #        Example "Assets:Current Assets:Savings"
+    # @param[in]    path            **String** of account names.
+    # @return                       **List** of account GUIDs as a string for each account in path,
+    #                               in element order for given path.
     def verifyPath(self, path):
 
         # List of GUID's to return if all account names are found with correct parent/child relations.
@@ -74,9 +82,8 @@ class AccountPaths():
             return None
 
 
-    ## Verifies a all path strings passed to script.
-    # Uses global Options.
-    # @return                   List of verified paths (from verifyPath()).
+    ## Verifies a all path strings passed to class.
+    # @return                       **List** of verified paths.
     def verifyPaths(self):
 
         # Paths to return.

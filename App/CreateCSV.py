@@ -1,18 +1,18 @@
 ##
 # @file
-# Creates CSV for generic reports.
+# Creates CSV file for generic reports.
 #
 
 import csv
 
 ## Create CSV
-# Creates a CSV report from a ParseData object.
+# @brief Creates a CSV report from a ParseData object.
 class CreateCSV():
 
-    ## Create CSV Constructor.
-    # @param    reportObj       A list of reports to create summary of (output of ParseData).
-    # @param    options         Options from config file.
-    # @param    verbose         Prints status when true.
+    ## Constructor
+    # @param[in]    reportObj       **List**, output from ParseData class, reports to create the CSV for.
+    # @param[in]    options         **Object**, options from config file.
+    # @param[in]    verbose         **Optional Boolean**, prints status when true.
     def __init__(self, reportObj, options, verbose = False):
         self.verbose = verbose
 
@@ -23,14 +23,14 @@ class CreateCSV():
         self.outputFile = options.OutputFile
         self.depth      = options.Depth
 
-        self.createSummary()
+        self.createFile()
 
 
-    ## Get header for single report
-    # Reports will usually have the same headers, but not always. Reconsiling the headers will allow
-    # for leaving an account blank for a report where it didn't exist.
-    # @param        report      Data from report.
-    # @param[out]   headers     Headers to be created.
+    ## Get header for single report.
+    # @brief Headers can change based on date range. Reconsiling the headers will allow leave an
+    #        account blank for a report when it didn't exist.
+    # @param[in]    report          **Object**, Data from report.
+    # @param[out]   headers         **Dictonary**, Headers to be created.
     def getReportHeader(self, report, headers):
 
         # Loop through each account in report.
@@ -50,9 +50,9 @@ class CreateCSV():
 
 
     ## Recursively sum total for single report
-    # @param    report          Data from report.
-    # @param    headers         Headers for report.
-    # @param    row             I don't remember..
+    # @param[in]    report          **Object**, Data from report.
+    # @param[in]    headers         **Dictonary**, Headers to use.
+    # @param[in]    row             **String**, index for row.
     def getTotals(self, report, headers, row):
 
         # Loop through each account in report.
@@ -73,8 +73,8 @@ class CreateCSV():
                 row[index] = accountdata['totalAccount']
 
 
-    ## Creates Summary of reports.
-    def createSummary(self):
+    ## Creates CSV File.
+    def createFile(self):
 
         #
         # Build headers.

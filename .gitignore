@@ -3,6 +3,5 @@ results
 __pycache__
 oldstuff
 Docyfile
-docs
-Doxyfile
 *_config.ini
+docs
