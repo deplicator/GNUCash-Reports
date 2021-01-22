@@ -98,13 +98,16 @@ class CreateCSV():
         rows = {}
         for report in self.reports:
 
+            # Use date as string so it looks nice in CSV.
+            dateIndex = report['endDate'].strftime("%Y-%m-%d")
+
             # Use report date as key for row.
-            rows[report['endDate']] = [None for i in range(headerLen)]
+            rows[dateIndex] = [None for i in range(headerLen)]
 
             # Fill in totals for this row.
             self.getTotals(report['data'],
                            headers[self.depth],
-                           rows[report['endDate']])
+                           rows[dateIndex])
 
         #
         # Write it to a CSV.
