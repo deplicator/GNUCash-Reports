@@ -1,7 +1,8 @@
-results
 *.gnucash
+*.ini
 __pycache__
-oldstuff
-Docyfile
-*_config.ini
+output
 docs
+
+!example_config.ini
+!example_accounts.gnucash

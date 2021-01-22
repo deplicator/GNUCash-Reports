@@ -1,0 +1,3498 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gnc-v2
+     xmlns:gnc="http://www.gnucash.org/XML/gnc"
+     xmlns:act="http://www.gnucash.org/XML/act"
+     xmlns:book="http://www.gnucash.org/XML/book"
+     xmlns:cd="http://www.gnucash.org/XML/cd"
+     xmlns:cmdty="http://www.gnucash.org/XML/cmdty"
+     xmlns:price="http://www.gnucash.org/XML/price"
+     xmlns:slot="http://www.gnucash.org/XML/slot"
+     xmlns:split="http://www.gnucash.org/XML/split"
+     xmlns:sx="http://www.gnucash.org/XML/sx"
+     xmlns:trn="http://www.gnucash.org/XML/trn"
+     xmlns:ts="http://www.gnucash.org/XML/ts"
+     xmlns:fs="http://www.gnucash.org/XML/fs"
+     xmlns:bgt="http://www.gnucash.org/XML/bgt"
+     xmlns:recurrence="http://www.gnucash.org/XML/recurrence"
+     xmlns:lot="http://www.gnucash.org/XML/lot"
+     xmlns:addr="http://www.gnucash.org/XML/addr"
+     xmlns:billterm="http://www.gnucash.org/XML/billterm"
+     xmlns:bt-days="http://www.gnucash.org/XML/bt-days"
+     xmlns:bt-prox="http://www.gnucash.org/XML/bt-prox"
+     xmlns:cust="http://www.gnucash.org/XML/cust"
+     xmlns:employee="http://www.gnucash.org/XML/employee"
+     xmlns:entry="http://www.gnucash.org/XML/entry"
+     xmlns:invoice="http://www.gnucash.org/XML/invoice"
+     xmlns:job="http://www.gnucash.org/XML/job"
+     xmlns:order="http://www.gnucash.org/XML/order"
+     xmlns:owner="http://www.gnucash.org/XML/owner"
+     xmlns:taxtable="http://www.gnucash.org/XML/taxtable"
+     xmlns:tte="http://www.gnucash.org/XML/tte"
+     xmlns:vendor="http://www.gnucash.org/XML/vendor">
+<gnc:count-data cd:type="book">1</gnc:count-data>
+<gnc:book version="2.0.0">
+<book:id type="guid">f6f8c4596aef478cb4a020b52741c138</book:id>
+<book:slots>
+  <slot>
+    <slot:key>counter_formats</slot:key>
+    <slot:value type="frame"/>
+  </slot>
+  <slot>
+    <slot:key>options</slot:key>
+    <slot:value type="frame">
+      <slot>
+        <slot:key>Budgeting</slot:key>
+        <slot:value type="frame"/>
+      </slot>
+    </slot:value>
+  </slot>
+  <slot>
+    <slot:key>remove-color-not-set-slots</slot:key>
+    <slot:value type="string">true</slot:value>
+  </slot>
+</book:slots>
+<gnc:count-data cd:type="commodity">13</gnc:count-data>
+<gnc:count-data cd:type="account">26</gnc:count-data>
+<gnc:count-data cd:type="transaction">43</gnc:count-data>
+<gnc:count-data cd:type="price">71</gnc:count-data>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>BOND</cmdty:space>
+  <cmdty:id>BND</cmdty:id>
+  <cmdty:name>Vanguard Total Bond Market</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>BOND</cmdty:space>
+  <cmdty:id>FXNAX</cmdty:id>
+  <cmdty:name>Fidelity US Bond Index</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>BULLION</cmdty:space>
+  <cmdty:id>Gold (oz)</cmdty:id>
+  <cmdty:name>Gold</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>BULLION</cmdty:space>
+  <cmdty:id>Silver (oz)</cmdty:id>
+  <cmdty:name>Silver</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>CRYPTO</cmdty:space>
+  <cmdty:id>BTC</cmdty:id>
+  <cmdty:name>Bitcoin</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+  <cmdty:slots>
+    <slot>
+      <slot:key>user_symbol</slot:key>
+      <slot:value type="string">BTC</slot:value>
+    </slot>
+  </cmdty:slots>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>CRYPTO</cmdty:space>
+  <cmdty:id>LTC</cmdty:id>
+  <cmdty:name>Litecoin</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+  <cmdty:slots>
+    <slot>
+      <slot:key>user_symbol</slot:key>
+      <slot:value type="string">LTC</slot:value>
+    </slot>
+  </cmdty:slots>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>CURRENCY</cmdty:space>
+  <cmdty:id>USD</cmdty:id>
+  <cmdty:get_quotes/>
+  <cmdty:quote_source>currency</cmdty:quote_source>
+  <cmdty:quote_tz/>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>FUND</cmdty:space>
+  <cmdty:id>FZROX</cmdty:id>
+  <cmdty:name>Fidelity ZERO Total Market Index Fund</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>FUND</cmdty:space>
+  <cmdty:id>VOO</cmdty:id>
+  <cmdty:name>Vanguard S&amp;P 500 ETF</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>STOCK</cmdty:space>
+  <cmdty:id>AMZN</cmdty:id>
+  <cmdty:name>Amazon</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>STOCK</cmdty:space>
+  <cmdty:id>BABA</cmdty:id>
+  <cmdty:name>Alibaba</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>STOCK</cmdty:space>
+  <cmdty:id>MSFT</cmdty:id>
+  <cmdty:name>Microsoft</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>STOCK</cmdty:space>
+  <cmdty:id>NVDA</cmdty:id>
+  <cmdty:name>NVIDIA</cmdty:name>
+  <cmdty:fraction>10000</cmdty:fraction>
+</gnc:commodity>
+<gnc:commodity version="2.0.0">
+  <cmdty:space>template</cmdty:space>
+  <cmdty:id>template</cmdty:id>
+  <cmdty:name>template</cmdty:name>
+  <cmdty:xcode>template</cmdty:xcode>
+  <cmdty:fraction>1</cmdty:fraction>
+</gnc:commodity>
+<gnc:pricedb version="1">
+  <price>
+    <price:id type="guid">ed06297eb8a44f3c86dd2bb084ccef83</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Gold (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>1893660000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">1e36493c26574873ac5142371c736922</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Gold (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>1807010000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">8519b8b109f241e39ae592b0b7a6749a</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Gold (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>1878670000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">ec463c21597f4fb8a0f808978acbc62a</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Gold (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>1906560000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">a58c1171bb464121bdfa41560546db12</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Silver (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>26300000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">7d1b23fb25c24636848c573a8e1addba</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Silver (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>23400000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">bc6fc70123ee4a5da6c6584af53b4a87</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Silver (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>23650000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">b9378e72b5dc4aeba61cc9dd4f2848ab</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Silver (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>23870000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">5ecc6051e25941f8a3bb0f9874db9d42</price:id>
+    <price:commodity>
+      <cmdty:space>BULLION</cmdty:space>
+      <cmdty:id>Silver (oz)</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-16 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>9542300/317759</price:value>
+  </price>
+  <price>
+    <price:id type="guid">f07c5bb1d264433f8a73f40b1b3a2009</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>28990000000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">145891e013a744229af72bcc682f3477</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-11 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>transaction</price:type>
+    <price:value>18056700000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">56e88a21c9d04603a90756ea4cbe1fee</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>19433900000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">a945c268d4d7428f931053f93b6aa03c</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-14 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>1000000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">a3d3ec61083e416abbe061e38ead608a</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-13 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>transaction</price:type>
+    <price:value>16333800000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">ebcd5ca6fa2e4ac5ae015c64270483f6</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>13803200000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">c65da598d31b40b0bedce9b3f6756c62</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-17 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>1000000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">35c4b8b78ceb4c20ab53d2225625d549</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-16 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>transaction</price:type>
+    <price:value>11328900000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">9e602770261e462e91e8d8abdbd5421b</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>10779600000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">e03a0539c5b74026913acbf486240412</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>BTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-11 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>10775862069/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">9936ee9680ac4dc4bc428a1f2b5c235a</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>LTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>124740000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">80497643e47b4c69bfd65afde09e511a</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>LTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>87780000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">2a1257f189ab4b839b2983173159538b</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>LTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>55830000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">3749162a8a604ed293e5e7ca26054e56</price:id>
+    <price:commodity>
+      <cmdty:space>CRYPTO</cmdty:space>
+      <cmdty:id>LTC</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>46210000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">f4417af97bf84200aaf8cb827791dc5c</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>13490000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">61c855288ba843a9ae465ab2cf613fad</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>11918954/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">a110c6dcdeff4c6daa0ff04bffbb88ea</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-07 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>12674379/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">942c58883d48472eb266dfff847e4553</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>13080000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">143a20bbf27146f0b46641373c0172e5</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>11918953/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">2ece665a00fc4663b5dd28d0d49ac061</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>11810000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">bb1ac53db2c14ca4a3ff33cf63d570b2</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>11920003/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">05d394cb845a49c38f1043c7979c65bc</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>11920000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">ef8832d1ef28499dbb8183f35c3dcb7e</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>FZROX</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>11920002/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">f4cebb194ca647fba4c405c5c7f70982</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>343690000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">262fca037ea7480bab1020ea4bb8f187</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>303028571/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">48394aacc53b4a3eb3942f99039193d3</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>332640000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">c066f744f3b04ec0a5c82877558c0a56</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>303027870/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">36081bd4e1b5459e85c5d5b1955ece65</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>303310000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">71d6316bc3784031894f3892d37d3336</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>4339675/13887</price:value>
+  </price>
+  <price>
+    <price:id type="guid">886e5349723f4d4d8f390a6eec455fca</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>307650000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">0dae5370d10b49d2bcd03d97c27c074d</price:id>
+    <price:commodity>
+      <cmdty:space>FUND</cmdty:space>
+      <cmdty:id>VOO</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>307648898/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">2f8626b0dae543e781b6f896a8c5664c</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>3256930000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">dc39572256d741dbb3ae75db177b2a49</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:xfer-dialog</price:source>
+    <price:type>transaction</price:type>
+    <price:value>3177290000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">f50071ed82184897a6e9c5fba96b6d61</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>3168040000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">3d8713d2db2a4e37a560024912bcce1e</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>3004480000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">3bb2ca6c618f408188d3713c2e7c32bb</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:xfer-dialog</price:source>
+    <price:type>transaction</price:type>
+    <price:value>3190550000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">3a76459bda9b47588576ddc2ca035541</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>3148730000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">b4996a7087cc429aace8d14ffb6f33d1</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>AMZN</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>3148580568/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">ca5fd9c3107f487b8618c0ba01b37b31</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>232730000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">64515c9d7e24433da5c5eb6c39c5abf1</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>266090000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">e69d7fa31ef64a9c9d5282bcddf83281</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>263360000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">73a383527e0a45288bc3193b784f2fde</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-09 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>290530000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">9ebb86d5b3704df883e0df6c67e6cefc</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>310840000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">2f2e34f0b01940e9b3e86569c823a34e</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:xfer-dialog</price:source>
+    <price:type>transaction</price:type>
+    <price:value>300540000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">6b44ad8db5fe47ae95586f2d8f8634c5</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>293980000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">6c6cd937f16b4406be16d99947c6d2a7</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>BABA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:value>293979314/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">bd8d0511f26b472985a513b697c4ace7</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>222420000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">f3b58313990b451889ce84b1879bc228</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>216010000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">ba43c144908140298ebee4638db597eb</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>214070000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">8b14c7612ea640048f562027afc0f018</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-09 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>218390000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">1c6d160a3d3f411da417964597489c42</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>202330000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">1420adf9fa514690ae2c876b8b389037</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>210580000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">385db0113b9a4783a38c0604eb24229a</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>210330000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">8990f370bc784bb7935ce080aa292b6f</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>MSFT</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:xfer-dialog</price:source>
+    <price:type>transaction</price:type>
+    <price:value>202660000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">5381e3f8a8a1434d9c8d30f8669922f5</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>522200000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">73faafd6bc74481787287cd9b6185bf2</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-12-08 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>534000000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">274a0ccbd9614971bd1051695bcfff36</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>536060000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">6aad3cee450240e593ec25244614811f</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-11-09 06:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>545230000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">a3115fdfb6084c6b8598950f9784d3b7</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-31 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>503230000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">6d8fb735ba6b4008a638428137e5816d</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-10-08 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>553550000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">d72d952ad1434a7fb1e6b594ef9316ab</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-30 10:59:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:price</price:source>
+    <price:type>last</price:type>
+    <price:value>541220000/1000000</price:value>
+  </price>
+  <price>
+    <price:id type="guid">932837e4c1b5497a8f9516558133fce7</price:id>
+    <price:commodity>
+      <cmdty:space>STOCK</cmdty:space>
+      <cmdty:id>NVDA</cmdty:id>
+    </price:commodity>
+    <price:currency>
+      <cmdty:space>CURRENCY</cmdty:space>
+      <cmdty:id>USD</cmdty:id>
+    </price:currency>
+    <price:time>
+      <ts:date>2020-09-08 05:00:00 +0000</ts:date>
+    </price:time>
+    <price:source>user:split-register</price:source>
+    <price:type>transaction</price:type>
+    <price:value>476520000/1000000</price:value>
+  </price>
+</gnc:pricedb>
+<gnc:account version="2.0.0">
+  <act:name>Root Account</act:name>
+  <act:id type="guid">428dba980ba143cdb20afafb813a0f4d</act:id>
+  <act:type>ROOT</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Assets</act:name>
+  <act:id type="guid">fd332884571546ab961b6bac58d489cc</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Assets</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">428dba980ba143cdb20afafb813a0f4d</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Investments</act:name>
+  <act:id type="guid">f0ff07c61b5743a6a5ed4a5bd3315152</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Investments</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">fd332884571546ab961b6bac58d489cc</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Fidelity</act:name>
+  <act:id type="guid">02f1db4a002047d3a133f50aec943775</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">f0ff07c61b5743a6a5ed4a5bd3315152</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>_Cash Balance</act:name>
+  <act:id type="guid">da511ecc28554ff088672d0e8a0c5b13</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:parent type="guid">02f1db4a002047d3a133f50aec943775</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>FZROX</act:name>
+  <act:id type="guid">b34f7751b4504233aca3f14393330cb9</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>FUND</cmdty:space>
+    <cmdty:id>FZROX</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>Fidelity ZERO Total Market Index Fund</act:description>
+  <act:parent type="guid">02f1db4a002047d3a133f50aec943775</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>BABA</act:name>
+  <act:id type="guid">21087d480c464311a69722552d3b2b94</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>STOCK</cmdty:space>
+    <cmdty:id>BABA</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>Alibaba</act:description>
+  <act:parent type="guid">02f1db4a002047d3a133f50aec943775</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>AMZN</act:name>
+  <act:id type="guid">f2ade3b9396c47f68d4ae58d5a426eea</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>STOCK</cmdty:space>
+    <cmdty:id>AMZN</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>Amazon</act:description>
+  <act:parent type="guid">02f1db4a002047d3a133f50aec943775</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Vanguard</act:name>
+  <act:id type="guid">c73f7d0db5cc4cd8a86ceb12450bee81</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">f0ff07c61b5743a6a5ed4a5bd3315152</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>_Cash Balance</act:name>
+  <act:id type="guid">11801cd27a4545af92f1dfc62b4c6ec3</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:parent type="guid">c73f7d0db5cc4cd8a86ceb12450bee81</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>VOO</act:name>
+  <act:id type="guid">6f871add908848428373bbd0de0dc27c</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>FUND</cmdty:space>
+    <cmdty:id>VOO</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>Vanguard S&amp;P500 ETF</act:description>
+  <act:parent type="guid">c73f7d0db5cc4cd8a86ceb12450bee81</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>MSFT</act:name>
+  <act:id type="guid">d38c073e80584897b7eb28df57f1d025</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>STOCK</cmdty:space>
+    <cmdty:id>MSFT</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>Microsoft</act:description>
+  <act:parent type="guid">c73f7d0db5cc4cd8a86ceb12450bee81</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>NVDA</act:name>
+  <act:id type="guid">0cfb77abdd8a491784e337be83c273a5</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>STOCK</cmdty:space>
+    <cmdty:id>NVDA</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:description>NVIDA</act:description>
+  <act:parent type="guid">c73f7d0db5cc4cd8a86ceb12450bee81</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Bank</act:name>
+  <act:id type="guid">0d453d6ed2734a89a04749b01465a88c</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>The Bank's Name</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">fd332884571546ab961b6bac58d489cc</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Checking</act:name>
+  <act:id type="guid">44fbd4d616984140966331d7f1aa94d2</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:parent type="guid">0d453d6ed2734a89a04749b01465a88c</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Speculative Investments</act:name>
+  <act:id type="guid">6e6c558fc4cc4bdf92cfab5387bcf94a</act:id>
+  <act:type>ASSET</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Speculative Investments</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">fd332884571546ab961b6bac58d489cc</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Bitcoin</act:name>
+  <act:id type="guid">5b50f09ca60e4807ac486bda7348398d</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>CRYPTO</cmdty:space>
+    <cmdty:id>BTC</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">6e6c558fc4cc4bdf92cfab5387bcf94a</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Hot Wallet</act:name>
+  <act:id type="guid">1bbd09f359f4428ea487da7f3a825fc1</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>CRYPTO</cmdty:space>
+    <cmdty:id>BTC</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:parent type="guid">5b50f09ca60e4807ac486bda7348398d</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Offline Storage</act:name>
+  <act:id type="guid">d50543eed8f64c48b6cdd05facb24065</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>CRYPTO</cmdty:space>
+    <cmdty:id>BTC</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:parent type="guid">5b50f09ca60e4807ac486bda7348398d</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Silver</act:name>
+  <act:id type="guid">db2f5ad710cb40c282ba5d4b61af82be</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>BULLION</cmdty:space>
+    <cmdty:id>Silver (oz)</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:parent type="guid">6e6c558fc4cc4bdf92cfab5387bcf94a</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Income</act:name>
+  <act:id type="guid">a930cdae3d0d456e983bdaadb1ecb657</act:id>
+  <act:type>INCOME</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Income</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">428dba980ba143cdb20afafb813a0f4d</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Dividend Income</act:name>
+  <act:id type="guid">db23364b1e0048a391fdf0778d90095e</act:id>
+  <act:type>INCOME</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Dividend Income</act:description>
+  <act:parent type="guid">a930cdae3d0d456e983bdaadb1ecb657</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Salary</act:name>
+  <act:id type="guid">30a4929233bb436b8ae34204619247ad</act:id>
+  <act:type>INCOME</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:parent type="guid">a930cdae3d0d456e983bdaadb1ecb657</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Expenses</act:name>
+  <act:id type="guid">f60e86cc61f2431988731fb1969835ac</act:id>
+  <act:type>EXPENSE</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Expenses</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">428dba980ba143cdb20afafb813a0f4d</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Commissions</act:name>
+  <act:id type="guid">e6a85880027442b8a9ceccb678889dac</act:id>
+  <act:type>EXPENSE</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Commissions</act:description>
+  <act:parent type="guid">f60e86cc61f2431988731fb1969835ac</act:parent>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Investing</act:name>
+  <act:id type="guid">3fd84aa6d96f4e11bae5e4b216bc2bd8</act:id>
+  <act:type>EXPENSE</act:type>
+  <act:commodity>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:parent type="guid">f60e86cc61f2431988731fb1969835ac</act:parent>
+</gnc:account>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">7e68dd72f78740b2ab38d63e00132eaf</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:51:52 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Fidelity</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-02</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">c254983daa8a46ffa55879262365f259</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">7971a969842b458a82f3741ca90a071e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">6404dbf6f03f448089adc7fb06c2d6e5</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:57:21 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy BABA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">b4ad106a4f8a4f3ba15f3289653211d5</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>27002/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">21087d480c464311a69722552d3b2b94</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">37e337c308b24392b805319d3c33aec2</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-27002/100</split:value>
+      <split:quantity>-27002/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">2fa990463b614e6cb173006702fa6c22</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:00 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Fidelity</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">334ce39434754eceae0315b987a226c2</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">a73a65a03a644021997c20bfd51ee569</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">cbc863304c2b4c779be162efb9a1995b</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:57:59 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy BABA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">7df628be5107487d8ee9448bf1afbc30</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>30054/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">21087d480c464311a69722552d3b2b94</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">55a216d4557a440ba7f0c36f00dd97f7</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-30054/100</split:value>
+      <split:quantity>-30054/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">f763f343840a4ef5be632abd41525c06</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 17:01:24 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy AMZN</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">dfcbfa14b7e94104bd4cf620064bd68e</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>319055/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">f2ade3b9396c47f68d4ae58d5a426eea</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">381a417646104eff8eddf6375bdd7f5a</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-319055/100</split:value>
+      <split:quantity>-319055/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">afd2aa63a92c4c9d9ae55e44d69e9813</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 19:57:40 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy FZROX</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">95aef2b3259942ba87bca8db4a966d40</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>123889/100</split:value>
+      <split:quantity>1007228/10000</split:quantity>
+      <split:account type="guid">b34f7751b4504233aca3f14393330cb9</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">83c53125e46e423595e536db47617325</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-123889/100</split:value>
+      <split:quantity>-123889/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">9296f1650e764dc992505210af72c26f</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:06 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Fidelity</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">1b777c73852e4e25968552cea077d609</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">23638dea73cf4ddf933c4cf29a3e638f</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">5de6f6313ca947888cd1a61bdb01e08b</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:59:50 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy BABA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-09</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">da833e6fdfe043d8820c437bd9b0ec0c</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>29053/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">21087d480c464311a69722552d3b2b94</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">8a36da34fe084bdea8d2c5189021f7c2</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-29053/100</split:value>
+      <split:quantity>-29053/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">cea56f4289ba4870a63b7db7f3196bc4</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 19:58:22 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy FZROX</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-09</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">0a785605e74f439fb237a9e1c71faca5</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>220947/100</split:value>
+      <split:quantity>1742484/10000</split:quantity>
+      <split:account type="guid">b34f7751b4504233aca3f14393330cb9</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">ca3d4dae69674aaa8ba80d0a6bbb6c65</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-220947/100</split:value>
+      <split:quantity>-220947/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">448455f168114fff85e0f4779d7184ca</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:12 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Fidelity</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">1657ab4fc3c343a88ca63b1f0974e3e5</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">2f5e2576facb493280f5fd076102fd8a</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">b87b5d15614848fc88de256ed70e641a</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-07 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:33:32 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Dividened from FZROX</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-07</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">28d84817104d4866937b6b197f4f0f7b</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>2980/100</split:value>
+      <split:quantity>2980/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">01fb0b823333428697187774dcf4cc75</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-2980/100</split:value>
+      <split:quantity>-2980/100</split:quantity>
+      <split:account type="guid">db23364b1e0048a391fdf0778d90095e</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">312ff29db80546ba963782ad2f8163a0</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-07 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:35:03 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Dividened buy FZROX</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-07</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">ee7f6c77d47d47afac3bfd9ed08847d5</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>2980/100</split:value>
+      <split:quantity>22576/10000</split:quantity>
+      <split:account type="guid">b34f7751b4504233aca3f14393330cb9</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">c42175b4634d47f9b8c0ce3b9c822a66</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-2980/100</split:value>
+      <split:quantity>-2980/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">26339f330bf340b3871c7741104c1d83</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 17:00:18 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy BABA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">b2dcd13118514c9e89cd72bb38f9319a</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>26609/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">21087d480c464311a69722552d3b2b94</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">d2e07bcb1d7448718439e3e7dd9e3940</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-26609/100</split:value>
+      <split:quantity>-26609/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">16d232a73a4f473a988f160462b30e14</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 19:58:41 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy FZROX</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">91c51f9e956d4556ab3dd245938ad9b5</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>223391/100</split:value>
+      <split:quantity>1685970/10000</split:quantity>
+      <split:account type="guid">b34f7751b4504233aca3f14393330cb9</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">d931376514764b49a5bff26b218701cf</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-223391/100</split:value>
+      <split:quantity>-223391/100</split:quantity>
+      <split:account type="guid">da511ecc28554ff088672d0e8a0c5b13</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">3ab7491b3f71429ea079a4de29851e4a</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:16 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Vanguard</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">d96c5da362b6482ba3523ea5fb554d9e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">4cafff9b501a4c33a42ea5f81caf0fa6</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">3f16a2a6710c4b819e43890c26b85ace</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:01:22 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy MSFT</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-08</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">8db48fde24d84b7c8e8ce522cd127e17</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>20266/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">d38c073e80584897b7eb28df57f1d025</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">35883503872a4acda9bf8de88a135dbc</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-20266/100</split:value>
+      <split:quantity>-20266/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">8d4482310786412b9ae263906b7ceaf6</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:02:18 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy NVDA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">b2e472ff5cac4144a9652a28be055fbe</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>47652/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">0cfb77abdd8a491784e337be83c273a5</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">94d02ec046794ccb996370e47d8e4057</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-47652/100</split:value>
+      <split:quantity>-47652/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">bb70c77201654c76bc3b0c576f72bd68</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:04:42 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy VOO</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">4705d6fbeed74aa0a63119d09a65ae25</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>182082/100</split:value>
+      <split:quantity>59471/10000</split:quantity>
+      <split:account type="guid">6f871add908848428373bbd0de0dc27c</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">fc095e1fde464a478e9d23508b080ff3</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-182082/100</split:value>
+      <split:quantity>-182082/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">5a85f1c8021c4070b09ae5ed49279832</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:28 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Vanguard</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">930d220bc26f433bbdf2a61d157f795d</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">ce952d953e6c4cfa9ed6d77dc6c3f0be</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">f471e54eb27342e6b3070306d76b5228</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:01:29 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy MSFT</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">3f16087891184c8aa95c9e47d7d4752b</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>21058/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">d38c073e80584897b7eb28df57f1d025</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">53cfe81f017b4d9dbb1695a9f76ae2f0</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-21058/100</split:value>
+      <split:quantity>-21058/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">81f11895865f40c3a14e6c6486320ec4</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:02:40 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy NVDA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">a7405be367c140c3a13f3e8bbcc260c4</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>55355/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">0cfb77abdd8a491784e337be83c273a5</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">5d7cfbcc6c2046ffb6f4e105d366d0be</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-55355/100</split:value>
+      <split:quantity>-55355/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">394dc1f38a7c4f97b3311f7f740d2b22</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:05:02 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy VOO</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">873f733356874b98b5a4f1d96d1db8d0</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>173588/100</split:value>
+      <split:quantity>54973/10000</split:quantity>
+      <split:account type="guid">6f871add908848428373bbd0de0dc27c</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">393391a8a88d413b9816f0cc9c9c6be6</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-173588/100</split:value>
+      <split:quantity>-173588/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">dd1634e3853d4caf8e5efb5fe8a60191</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:34 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Vanguard</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">509cea73ffbd4ea3ae811935270f11b4</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">d196a651a8f541189970694c5165a0b8</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">7fdf66bd17a344bfa01b0ff7b80ad641</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:01:35 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy MSFT</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-09</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">305e3bad207d419d83a7c1a5d464d075</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>21839/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">d38c073e80584897b7eb28df57f1d025</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">218518a29e6a44338b2956f6ba1145d8</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-21839/100</split:value>
+      <split:quantity>-21839/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">ec4ced3f3dee4513a4e6263fee153a06</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:02:45 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy NVDA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-09</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">22b44f0bfca24347b6c869032eea0cbe</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>54523/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">0cfb77abdd8a491784e337be83c273a5</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">5ef93ee54cfe446c83d6d544bad35bc3</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-54523/100</split:value>
+      <split:quantity>-54523/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">19c4cdb91bfd4ead9675688fe5bf01f1</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-09 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:05:17 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy VOO</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-09</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">34dc29bb1a994035bce83840b05b15c0</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>173637/100</split:value>
+      <split:quantity>53302/10000</split:quantity>
+      <split:account type="guid">6f871add908848428373bbd0de0dc27c</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">2c942bd6e49341578dc2200cd5c36137</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-173637/100</split:value>
+      <split:quantity>-173637/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">3d6bac6121c44dbb9b0e77d0e115b4e2</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-02 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:52:39 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to Vanguard</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-02</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">793a74177181410d80e0207d20188efd</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>250000/100</split:value>
+      <split:quantity>250000/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">10948140dcfa4914a1cb20d30d1ee5f5</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-250000/100</split:value>
+      <split:quantity>-250000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">35101c10fe364edd81473796a8dd60a7</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:01:40 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy MSFT</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">e75d664b1c6e457abcf8a18a661dd29b</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>21601/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">d38c073e80584897b7eb28df57f1d025</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">98383b036d2e4b33ac67ff84cede7f15</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-21601/100</split:value>
+      <split:quantity>-21601/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">224cfa254ef742bb990a4220150b6204</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:02:50 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy NVDA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">8a938c219ac146ddb016df98c8740ce9</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>53400/100</split:value>
+      <split:quantity>10000/10000</split:quantity>
+      <split:account type="guid">0cfb77abdd8a491784e337be83c273a5</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">f0569174adca4214ac14bef31349073e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-53400/100</split:value>
+      <split:quantity>-53400/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">b38525bd13154b9ba92f2f4eb1264643</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-08 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:05:29 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy VOO</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-08</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">75f1bcae23874773bf27ddeb9bbcd19e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>174999/100</split:value>
+      <split:quantity>51446/10000</split:quantity>
+      <split:account type="guid">6f871add908848428373bbd0de0dc27c</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">0bfb8a6989f64834889792b866104900</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-174999/100</split:value>
+      <split:quantity>-174999/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">7f6db5b70b3b4ab5a75df73da8459e80</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-10 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:37:34 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Dividend from MSFT</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-10</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">c6e056fb008b427292f3bfc0ef0aa6f2</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>168/100</split:value>
+      <split:quantity>168/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">7cb25c0a650947d5a7c57121ea18cf01</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-168/100</split:value>
+      <split:quantity>-168/100</split:quantity>
+      <split:account type="guid">db23364b1e0048a391fdf0778d90095e</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">ee7c778e05b14889a316430fa717ec9c</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-29 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:38:54 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Dividend from NVDA</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-29</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">9ce61190594047fcba29dc2f8edf18df</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>48/100</split:value>
+      <split:quantity>48/100</split:quantity>
+      <split:account type="guid">11801cd27a4545af92f1dfc62b4c6ec3</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">1102b4a90ab24aa9b857c1e975e1d1ea</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-48/100</split:value>
+      <split:quantity>-48/100</split:quantity>
+      <split:account type="guid">db23364b1e0048a391fdf0778d90095e</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">b3d9321666654bcaa6956241a9141b25</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-01 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:42:51 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Pay day</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-01</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">53db51676b0f4c349231d5243e63411e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>1000000/100</split:value>
+      <split:quantity>1000000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">e5df81a577704054b326afae1fec127a</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-1000000/100</split:value>
+      <split:quantity>-1000000/100</split:quantity>
+      <split:account type="guid">30a4929233bb436b8ae34204619247ad</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">cc91083cdcf54c689c9c2c7883496bd1</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-11 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:11:11 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy Bitcoin</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-11</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">76a4e4485f9249a88259e23b56fd330b</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>150000/100</split:value>
+      <split:quantity>1445/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">0a3502d28cfd442f86c2716b277c1335</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-150000/100</split:value>
+      <split:quantity>-150000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">d0feada6a6b144919ce91f6a9cb3d807</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-09-16 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:21:05 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy Silver 1kg bar, $2.53 over spot (includes shipping)</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-09-16</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">c41082c0bd78437fa47140af637dae98</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>95423/100</split:value>
+      <split:quantity>321507/10000</split:quantity>
+      <split:account type="guid">db2f5ad710cb40c282ba5d4b61af82be</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">8dbeceec92544b2ab27abd40abdf4d46</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>995/100</split:value>
+      <split:quantity>995/100</split:quantity>
+      <split:account type="guid">3fd84aa6d96f4e11bae5e4b216bc2bd8</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">392a4f0363be4326bf824349fdc40544</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-96418/100</split:value>
+      <split:quantity>-96418/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">03db30201e9049d792b4359ae5010bd8</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-01 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:42:58 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Pay day</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-01</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">eafa4671391d46b48b7e05e01db0a4de</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>1000000/100</split:value>
+      <split:quantity>1000000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">793071db7f0c4032b2c0f9919d674aa4</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-1000000/100</split:value>
+      <split:quantity>-1000000/100</split:quantity>
+      <split:account type="guid">30a4929233bb436b8ae34204619247ad</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">17f525ff53a84eba90b798a57048673b</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-16 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:11:22 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy Bitcoin</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-16</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">38a4dcec8a7d47a9a8f5e9cb61fc40f8</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>150000/100</split:value>
+      <split:quantity>1325/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">b91960d5968641c1b87e9d43cb67e1dc</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-150000/100</split:value>
+      <split:quantity>-150000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">240793f6b52f4fcba6b1d1ac5bba5ae0</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-01 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:43:03 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Pay day</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-01</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">65672ae11c28428fbe650ae069df168e</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>1000000/100</split:value>
+      <split:quantity>1000000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">c144702bdd724bbeaa4923f5df704287</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-1000000/100</split:value>
+      <split:quantity>-1000000/100</split:quantity>
+      <split:account type="guid">30a4929233bb436b8ae34204619247ad</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">8e349a3690c546de884714147a87d32d</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-11-13 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:11:30 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy Bitcoin</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-11-13</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">fea8de6ab147461a9df93d6f3989f9ec</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>150000/100</split:value>
+      <split:quantity>918/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">615dead75ff14e55af0063b4e2d28231</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-150000/100</split:value>
+      <split:quantity>-150000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">e2eca8a558d642209ddae131f848a70a</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-01 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 16:43:08 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Pay day</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-01</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">b7553c708c624a23942c6b3318afbcb2</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>1000000/100</split:value>
+      <split:quantity>1000000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">2d190882f6c24830ac2ae86bf6bea9e6</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-1000000/100</split:value>
+      <split:quantity>-1000000/100</split:quantity>
+      <split:account type="guid">30a4929233bb436b8ae34204619247ad</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">411b1ecb95894f35a408089723fa7144</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-11 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:11:50 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Buy Bitcoin</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-11</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">6012b7e563ef47428fe8d41ed77a471d</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>150000/100</split:value>
+      <split:quantity>831/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">6548f19b559a4242842086bd39a5db62</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-150000/100</split:value>
+      <split:quantity>-150000/100</split:quantity>
+      <split:account type="guid">44fbd4d616984140966331d7f1aa94d2</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">a945ab343e8641f08d09d061dd8721e6</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-10-17 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:15:09 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to offline storage</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-10-17</gdate>
+      </slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">64c442144f1d413a9b0347f9b0d81038</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>20/100</split:value>
+      <split:quantity>2000/10000</split:quantity>
+      <split:account type="guid">d50543eed8f64c48b6cdd05facb24065</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">3655e2e7950a4f11a467b0ee15e60681</split:id>
+      <split:action>Sell</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-20/100</split:value>
+      <split:quantity>-2000/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">5c62ba1dd8b5468d8ef8f598d97f92ce</trn:id>
+  <trn:currency>
+    <cmdty:space>CURRENCY</cmdty:space>
+    <cmdty:id>USD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2020-12-12 10:59:00 +0000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2021-01-22 20:17:01 +0000</ts:date>
+  </trn:date-entered>
+  <trn:description>Transfer to offline storage</trn:description>
+  <trn:slots>
+    <slot>
+      <slot:key>date-posted</slot:key>
+      <slot:value type="gdate">
+        <gdate>2020-12-12</gdate>
+      </slot:value>
+    </slot>
+    <slot>
+      <slot:key>notes</slot:key>
+      <slot:value type="string"></slot:value>
+    </slot>
+  </trn:slots>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">f42033557ab245c88f31a840e14a3f39</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>10/100</split:value>
+      <split:quantity>1000/10000</split:quantity>
+      <split:account type="guid">d50543eed8f64c48b6cdd05facb24065</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">2c364a5398534710aa68d7939bf8ff11</split:id>
+      <split:action>Sell</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-10/100</split:value>
+      <split:quantity>-1000/10000</split:quantity>
+      <split:account type="guid">1bbd09f359f4428ea487da7f3a825fc1</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+</gnc:book>
+</gnc-v2>
+

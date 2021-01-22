@@ -130,6 +130,6 @@ class CreateCSV():
             allRows.append(totalRow)
 
         # Write it
-        with open(self.outputFile.name, 'w', newline='', encoding='utf-8') as f:
+        with open(self.outputFile, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f, lineterminator="\n")
             writer.writerows(allRows)

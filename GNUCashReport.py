@@ -7,7 +7,8 @@ import configparser
 import sys
 import xml.etree.ElementTree as ET
 
-from types import SimpleNamespace
+from pathlib import Path
+from types   import SimpleNamespace
 
 from App.ParseData               import ParseData
 from App.CreateCSV               import CreateCSV
@@ -15,7 +16,7 @@ from App.CreateCSV_AssetCategory import CreateCSV_AssetCategory # This report ty
 
 
 ## Get command line arguments.
-# @return   Argparse object.
+# @return                   Argparse object.
 def getArguments():
     parser = argparse.ArgumentParser(description='Create simple asset balance reports from \
                                                   uncompressed GNUCash file.')
@@ -37,9 +38,22 @@ def getArguments():
     return options
 
 
+## Open the files to write teh CSVs to.
+# @brief Create path if it doesn't exist. These should get closed in the CreateCSV* class.
+# @param[in]    filePath    String for file path.
+# @return                   Object, file to use.
+def openOutputFile(filePath):
+    filePathList = filePath.split('/')                      # Convert to list, split on path delimeter.
+    del filePathList[-1]                                    # Last element will be filename.
+    filePathString = '/'.join(filePathList)                 # Create string of path without file.
+    Path(filePathString).mkdir(parents=True, exist_ok=True) # Create directories.
+
+    return filePath
+
+
 ## Get arguments from config file if -c option.
-# @param    options     Config file object from argparse.
-# @return               An object similar to the argparse object build from configparser.
+# @param[in]    options     Config file object from argparse.
+# @return                   An object similar to the argparse object build from configparser.
 def getConfigFile(options):
 
     # Build the options from the config file.
@@ -56,16 +70,16 @@ def getConfigFile(options):
     assetBalanceRunReport    = config['ASSET'].getboolean('balanceReport')
     assetCategoryRunReport   = config['ASSET'].getboolean('categoryReport')
     assetInvestmentRunReport = config['ASSET'].getboolean('investmentReport')
-    assetBalanceOutput       = None if (not assetBalanceRunReport) else open(config['ASSET']['balanceOutput'], 'w')
-    assetCategoryOutput      = None if (not assetCategoryRunReport) else open(config['ASSET']['categoryOutput'], 'w')
-    assetInvestmentOutput    = None if (not assetInvestmentRunReport) else open(config['ASSET']['investmentOutput'], 'w')
+    assetBalanceOutput       = None if (not assetBalanceRunReport) else openOutputFile(config['ASSET']['balanceOutput'])
+    assetCategoryOutput      = None if (not assetCategoryRunReport) else openOutputFile(config['ASSET']['categoryOutput'])
+    assetInvestmentOutput    = None if (not assetInvestmentRunReport) else openOutputFile(config['ASSET']['investmentOutput'])
     assetAccounts            = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(','))))
     assetDepth               = int(config['ASSET']['depth']) if (int(config['ASSET']['depth'])) else None
     assetDates               = list(filter(None, map(lambda date: date.strip(), config['ASSET']['dates'].split(','))))
 
     # Income Statement report options.
     incomeStatementRunReport  = config['INCOME STATEMENT'].getboolean('report')
-    incomeStatementOutput     = None if (not incomeStatementRunReport) else open(config['INCOME STATEMENT']['output'], 'w')
+    incomeStatementOutput     = None if (not incomeStatementRunReport) else openOutputFile(config['INCOME STATEMENT']['output'])
     incomeStatementAccounts   = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(','))))
     incomeStatementDepth      = int(config['INCOME STATEMENT']['depth']) if (int(config['INCOME STATEMENT']['depth'])) else None
     incomeStatementDates      = list(filter(None, map(lambda date: date.strip(), config['INCOME STATEMENT']['dates'].split(','))))
@@ -109,19 +123,23 @@ def getConfigFile(options):
 
 
 ## Returns the GNUCash XML as an ElementTree object.
-# @param    filename    Name of uncompressed GNUCash xml file.
-# @return               ElementTree object.
+# @param[in]    filename    Name of uncompressed GNUCash xml file.
+# @return                   ElementTree object.
 def getParsedXML(filename):
-    tree = ET.parse(filename)
+    try:
+        tree = ET.parse(filename)
+    except ET.ParseError as err:
+        print("ERROR: Unable to read GNUCash file. Is it saved as an uncompressed XML?")
+        sys.exit()
+
     return tree.getroot()
 
 
 ## Return an object of namespaces.
-# @return               Dictonary suitable for use with ElementTree.
+# @return                   Dictonary suitable for use with ElementTree.
 def getNamespaces():
 
-    # I was unable to get element tree to give the root attributes. Not sure why but these shouldn't
-    # change often.
+    # Wasn't able to get element tree to return the root attributes. These shouldn't change often.
     return {
         'gnc'        : 'http://www.gnucash.org/XML/gnc',
         'act'        : 'http://www.gnucash.org/XML/act',
