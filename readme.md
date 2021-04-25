@@ -50,8 +50,8 @@ To generate documentation run,
 
 ## Future
 The obvious feature to add is to use the Google Sheets API to make the spreadsheets. This first step
-is much easier than manually running reports in GNUCash and hand copying the results. Her is a short
-list of what needs updating or fixing.
+is much easier than manually running reports in GNUCash and hand copying the results. Here is a
+short list of what needs updating or fixing.
 
  * Better verbose output, particularly something that shows what dates the ParseData is working on.
    Also, flush stdout so the print out doesn't come all at once at the end.

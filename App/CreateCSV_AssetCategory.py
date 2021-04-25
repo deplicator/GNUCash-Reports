@@ -5,6 +5,9 @@
 
 import csv
 
+from App.Options import Options
+
+
 ## Create CSV - Asset Category
 # @brief The intent of this report is to give the current value of assets per category (Stocks,
 #        Bonds, Bullion, etc...). This will create a CSV file with rows for date range and columns
@@ -13,22 +16,13 @@ import csv
 class CreateCSV_AssetCategory():
 
     ## Constructor
-    # @param[in]    GNUCashXML          **Object**, GNUCash XML parsed by ElementTree, needed to get
-    #                                   list of security namespaces.
-    # @param[in]    XMLnamespaces       **Object**, namespaces used in GNUCash XML, not to be
-    #                                   confused swith ecurity namespaces.
     # @param[in]    assetBalanceReport  **List**, Asset Balance Report from ParseData.
     # @param[in]    options             **Object**, options from config file.
-    # @param[in]    verbose             **Optonal Boolean**, prints status when true.
-    def __init__(self, GNUCashXML, XMLnamespaces, assetBalanceReport, options, verbose = False):
+    def __init__(self, assetBalanceReport, options):
 
-        self.verbose = verbose
-
-        if (self.verbose):
+        if (Options.verbose):
             print("    Creating Asset Category CSV")
 
-        self.GNUCashXML = GNUCashXML
-        self.ns         = XMLnamespaces
         self.reports    = assetBalanceReport.report
         self.outputFile = options.OutputFile
         self.depth      = options.Depth
@@ -48,13 +42,13 @@ class CreateCSV_AssetCategory():
     #        float as values. A copy will be added for each row (date range).
     # @return                       **Dictonary** of categories to use as headers.
     def createHeaders(self):
-        if (self.verbose):
+        if (Options.verbose):
             print("      Creating categoris from security namespaces.")
 
         categories = {}
 
-        for commodity in self.GNUCashXML.findall(".//gnc:commodity", self.ns):
-            category = commodity.find("./cmdty:space", self.ns).text
+        for commodity in Options.GNUCashXML.findall(".//gnc:commodity", Options.namespaces):
+            category = commodity.find("./cmdty:space", Options.namespaces).text
 
             if category not in categories:
                 categories[category] = 0.0
@@ -98,7 +92,7 @@ class CreateCSV_AssetCategory():
         # Converted to stirng so it looks nice in the CSV.
         dateIndex = singleReport['endDate'].strftime("%Y-%m-%d")
 
-        if (self.verbose):
+        if (Options.verbose):
             print("      Totaling for {}".format(dateIndex))
 
         for account in singleReport['data']:
@@ -107,7 +101,7 @@ class CreateCSV_AssetCategory():
 
     ## Write date to CSV file.
     def createFile(self):
-        if (self.verbose):
+        if (Options.verbose):
             print("      Making CSV.")
 
         allRows = []

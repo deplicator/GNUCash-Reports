@@ -10,7 +10,11 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from types   import SimpleNamespace
 
+from App.Options import Options
+
 from App.ParseData               import ParseData
+from App.ParseDataAssetBalance   import ParseDataAssetBalance
+
 from App.CreateCSV               import CreateCSV
 from App.CreateCSV_AssetCategory import CreateCSV_AssetCategory # This report type is unique.
 
@@ -60,11 +64,11 @@ def getConfigFile(options):
     config = configparser.ConfigParser()
     config.read(options.config.name)
 
-    # Do we want to see stuff in the terminal?
-    verbose = options.verbose or config['OPTIONS'].getboolean('verbose')
-
     # Get the GNUCash XML file path.
     input = open(config['OPTIONS']['input'], 'r')
+
+    # Do we want to see stuff in the terminal?
+    verbose = options.verbose or config['OPTIONS'].getboolean('verbose')
 
     # Asset Balance and Asset Investment report options.
     assetBalanceRunReport    = config['ASSET'].getboolean('balanceReport')
@@ -93,33 +97,36 @@ def getConfigFile(options):
         print("Unexpected number of dates in config file under [INCOME STATEMENT], they should be in pairs.")
         sys.exit()
 
-    return SimpleNamespace(config          = options.config.name,
-                           verbose         = verbose,
+    return SimpleNamespace(config          = options.config,
                            input           = input,
-                           assetBalance    = SimpleNamespace(ReportType            = 'Asset Balance',
-                                                             RunReport             = assetBalanceRunReport,
-                                                             OutputFile            = assetBalanceOutput,
-                                                             Accounts              = assetAccounts,
-                                                             Depth                 = assetDepth,
-                                                             Dates                 = assetDates),
-                           assetCategory   = SimpleNamespace(ReportType            = 'Asset Category',
-                                                             RunReport             = assetCategoryRunReport,
-                                                             OutputFile            = assetCategoryOutput,
-                                                             Accounts              = assetAccounts,
-                                                             Depth                 = assetDepth,
-                                                             Dates                 = assetDates),
-                           assetInvestment = SimpleNamespace(ReportType            = 'Asset Investment',
-                                                             RunReport             = assetInvestmentRunReport,
-                                                             OutputFile            = assetInvestmentOutput,
-                                                             Accounts              = assetAccounts,
-                                                             Depth                 = assetDepth,
-                                                             Dates                 = assetDates),
-                           incomeStatement = SimpleNamespace(ReportType            = 'Income Statement',
-                                                             RunReport             = incomeStatementRunReport,
-                                                             OutputFile            = incomeStatementOutput,
-                                                             Accounts              = incomeStatementAccounts,
-                                                             Depth                 = incomeStatementDepth,
-                                                             Dates                 = incomeStatementDates))
+                           verbose         = verbose,
+                           assetBalance    = SimpleNamespace(ReportType = 'Asset Balance',
+                                                             RunReport  = assetBalanceRunReport,
+                                                             OutputFile = assetBalanceOutput,
+                                                             Accounts   = assetAccounts,
+                                                             Depth      = assetDepth,
+                                                             Dates      = assetDates),
+                           assetCategory   = SimpleNamespace(ReportType = 'Asset Category',
+                                                             RunReport  = assetCategoryRunReport,
+                                                             OutputFile = assetCategoryOutput,
+                                                             Accounts   = assetAccounts,
+                                                             Depth      = assetDepth,
+                                                             Dates      = assetDates),
+                           assetInvestment = SimpleNamespace(ReportType = 'Asset Investment',
+                                                             RunReport  = assetInvestmentRunReport,
+                                                             OutputFile = assetInvestmentOutput,
+                                                             Accounts   = assetAccounts,
+                                                             Depth      = assetDepth,
+                                                             Dates      = assetDates),
+                           incomeStatement = SimpleNamespace(ReportType = 'Income Statement',
+                                                             RunReport  = incomeStatementRunReport,
+                                                             OutputFile = incomeStatementOutput,
+                                                             Accounts   = incomeStatementAccounts,
+                                                             Depth      = incomeStatementDepth,
+                                                             Dates      = incomeStatementDates),
+                           GNUCashXML = getParsedXML(input.name),
+                           namespaces = getNamespaces()
+                                                             )
 
 
 ## Returns the GNUCash XML as an ElementTree object.
@@ -179,61 +186,58 @@ if __name__ == '__main__':
     # Report options set by commonad line and/or config file.
     opts = getArguments()
     opts = getConfigFile(opts)
-
-    GNUCashXML = getParsedXML(opts.input.name)  # GNUCash fils as XML object.
-    namespaces = getNamespaces()                # Dictionary of XML namespaces used in GNUCash file.
+    Options.set(opts)   # Make these things "global".
 
     #
     # Run Asset Balance Report
     #
     AssetBalanceObj = None
 
-    if (opts.assetBalance.RunReport):
-        if (opts.verbose):
+    if (Options.assetBalance.RunReport):
+        if (Options.verbose):
             print("== Running Asset Balance ==")
 
-        AssetBalanceObj = ParseData(GNUCashXML, namespaces, opts.assetBalance, opts.verbose)
+        AssetBalanceObj = ParseData(opts.assetBalance)
 
-        if (opts.assetBalance.RunReport):
-            CreateCSV(AssetBalanceObj, opts.assetBalance, opts.verbose)
+        CreateCSV(AssetBalanceObj, opts.assetBalance)
 
     #
     # Run Asset Values by Type Report
     #
     AssetCategoryObj = None
 
-    if (opts.assetCategory.RunReport):
-        if (opts.verbose):
+    if (Options.assetCategory.RunReport):
+        if (Options.verbose):
             print("== Running Asset Category ==")
 
         # Need asset balance to create asset category.
         if (None == AssetBalanceObj):
-            AssetBalanceObj = ParseData(GNUCashXML, namespaces, opts.assetBalance, opts.verbose)
+            AssetBalanceObj = ParseData(opts.assetBalance)
 
-        CreateCSV_AssetCategory(GNUCashXML, namespaces, AssetBalanceObj, opts.assetCategory, opts.verbose)
+        CreateCSV_AssetCategory(AssetBalanceObj, opts.assetCategory)
 
     #
     # Run Asset Investment Report
     #
     AssetInvestmentObj = None
 
-    if (opts.assetInvestment.RunReport):
-        if (opts.verbose):
+    if (Options.assetInvestment.RunReport):
+        if (Options.verbose):
             print("== Running Asset Investment ==")
 
-        AssetInvestmentObj = ParseData(GNUCashXML, namespaces, opts.assetInvestment, opts.verbose)
+        AssetInvestmentObj = ParseData(opts.assetInvestment)
 
-        CreateCSV(AssetInvestmentObj, opts.assetInvestment, opts.verbose)
+        CreateCSV(AssetInvestmentObj, opts.assetInvestment)
 
     #
     # Run Income Statement Report
     #
     IncomeStatementObj = None
 
-    if (opts.incomeStatement.RunReport):
-        if (opts.verbose):
+    if (Options.incomeStatement.RunReport):
+        if (Options.verbose):
             print("== Running Income Statement ==")
 
-        IncomeStatementObj = ParseData(GNUCashXML, namespaces, opts.incomeStatement, opts.verbose)
+        IncomeStatementObj = ParseData(opts.incomeStatement)
 
-        CreateCSV(IncomeStatementObj, opts.incomeStatement, opts.verbose)
+        CreateCSV(IncomeStatementObj, opts.incomeStatement)

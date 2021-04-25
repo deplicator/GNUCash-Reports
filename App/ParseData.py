@@ -5,6 +5,7 @@
 
 from datetime import datetime, date
 
+from App.Options      import Options
 from App.AccountPaths import AccountPaths
 
 
@@ -13,18 +14,14 @@ from App.AccountPaths import AccountPaths
 class ParseData():
 
     ## Constructor
-    # @param[in]    GNUCashXML          **Object**, GNUCash XML parsed by ElementTree.
     # @param[in]    namespaces          **Object**, namespaces used in GNUCash XML.
     # @param[in]    options             **Object**, options from config file.
-    # @param[in]    verbose             **Optional Boolean**, prints status when true.
-    def __init__(self, GNUCashXML, namespaces, options, verbose):
+    def __init__(self, options):
 
-        if (verbose):
+        if (Options.verbose):
             print("    Parsing Data")
 
-        self.GNUCashXML = GNUCashXML
-        self.ns         = namespaces
-        self.accounts   = options.Accounts
+        self.accounts = options.Accounts
 
         # A way to differentiate Asset Balance reports from the others. So far it's the only type
         # of report that limits transactions with only and end date.
@@ -33,7 +30,7 @@ class ParseData():
             transactionWindow = False
 
         # Get a list of accounts to make report for.
-        self.accountPaths = AccountPaths(self.GNUCashXML, self.ns, self.accounts)
+        self.accountPaths = AccountPaths(self.accounts)
 
         # Build report object. List will be ordered by sets of start and end dates defined in the
         # config file.
@@ -63,10 +60,10 @@ class ParseData():
         transactions = []
 
         # Go through all transactions in the XML.
-        for transaction in self.GNUCashXML.findall('.//gnc:transaction', self.ns):
+        for transaction in Options.GNUCashXML.findall('.//gnc:transaction', Options.namespaces):
 
             # Find the transaction date.
-            dateString = transaction.find('./trn:date-posted/ts:date', self.ns).text
+            dateString = transaction.find('./trn:date-posted/ts:date', Options.namespaces).text
             dateObject = datetime.strptime(dateString.split()[0], "%Y-%m-%d")
 
             # Filter by dates.
@@ -100,19 +97,19 @@ class ParseData():
         for each in transactions:
 
             # Transasctions will have 2 or more splits.
-            for split in each.findall('.//trn:split', self.ns):
+            for split in each.findall('.//trn:split', Options.namespaces):
 
-                account = split.find('./split:account', self.ns).text
+                account = split.find('./split:account', Options.namespaces).text
 
                 if account == accountId:
 
                     # Convert value from text, split fraction, and accumulate.
-                    splitValue = split.find('./split:value', self.ns).text
+                    splitValue = split.find('./split:value', Options.namespaces).text
                     splitValue = splitValue.split('/') # split fraction
                     value += (int(splitValue[0])) / (int(splitValue[1]))
 
                     # Convert value from text, split fraction, and accumulate.
-                    splitQuatity = split.find('./split:quantity', self.ns).text
+                    splitQuatity = split.find('./split:quantity', Options.namespaces).text
                     splitQuatity = splitQuatity.split('/')
                     quantity += (int(splitQuatity[0])) / (int(splitQuatity[1]))
 
@@ -136,8 +133,8 @@ class ParseData():
         #     <act:parent type="guid">3af4bc34b6af4dda845cb156340c3b53</act:parent>
         # </gnc:account>
 
-        accountEl   = self.GNUCashXML.find(".//gnc:account[act:id='{}']".format(accountId), self.ns)
-        commodityId = accountEl.find('./act:commodity/cmdty:id', self.ns)
+        accountEl   = Options.GNUCashXML.find(".//gnc:account[act:id='{}']".format(accountId), Options.namespaces)
+        commodityId = accountEl.find('./act:commodity/cmdty:id', Options.namespaces)
 
         return commodityId.text
 
@@ -162,15 +159,15 @@ class ParseData():
         namespace = None
         symbol    = None
 
-        commodityEl     = self.GNUCashXML.find(".//gnc:commodity[cmdty:id='{}']".format(commodityId), self.ns)
-        commoditySlotsEl = commodityEl.find('./cmdty:slots/slot', self.ns)
+        commodityEl     = Options.GNUCashXML.find(".//gnc:commodity[cmdty:id='{}']".format(commodityId), Options.namespaces)
+        commoditySlotsEl = commodityEl.find('./cmdty:slots/slot', Options.namespaces)
 
         if commodityEl:
-            namespace = commodityEl.find('./cmdty:space', self.ns).text
+            namespace = commodityEl.find('./cmdty:space', Options.namespaces).text
 
         # Not all commodities have slots
         if commoditySlotsEl:
-            symbol = commoditySlotsEl.find('./slot:value', self.ns).text
+            symbol = commoditySlotsEl.find('./slot:value', Options.namespaces).text
 
         return namespace, symbol
 
@@ -192,14 +189,14 @@ class ParseData():
             commodityValue = 1.0
             return commodityValue, commodityValueDate
 
-        for commodity in self.GNUCashXML.findall(".//price:commodity[cmdty:id='{}']...".format(commodityId), self.ns):
+        for commodity in Options.GNUCashXML.findall(".//price:commodity[cmdty:id='{}']...".format(commodityId), Options.namespaces):
 
-            dateString = commodity.find("./price:time/ts:date", self.ns).text
+            dateString = commodity.find("./price:time/ts:date", Options.namespaces).text
             dateObject = datetime.strptime(dateString.split()[0], "%Y-%m-%d")
 
             # limit by dates
             if ((dateObject <= endDate) and (dateObject >= commodityValueDate)):
-                commodityValue     = commodity.find("./price:value", self.ns).text
+                commodityValue     = commodity.find("./price:value", Options.namespaces).text
                 commodityValueDate = dateObject
 
         if (isinstance(commodityValue, str)):
@@ -220,16 +217,16 @@ class ParseData():
     # @return                       **Dictonary**, report data with initial account information.
     def buildReportData(self, accountId, transctions, endDate, level = 0):
 
-        accountEl = self.GNUCashXML.find(".//gnc:account[act:id='{}']".format(accountId), self.ns)
+        accountEl = Options.GNUCashXML.find(".//gnc:account[act:id='{}']".format(accountId), Options.namespaces)
         children = {}
 
         # Recursive call on children for this account.
-        for child in self.GNUCashXML.findall(".//gnc:account[act:parent='{}']".format(accountId), self.ns):
-            childId = child.find('./act:id', self.ns).text
+        for child in Options.GNUCashXML.findall(".//gnc:account[act:parent='{}']".format(accountId), Options.namespaces):
+            childId = child.find('./act:id', Options.namespaces).text
             children[childId] = self.buildReportData(childId, transctions, endDate, level + 1)
 
         # Setup elements for this report data object.
-        name                                = accountEl.find('./act:name', self.ns).text
+        name                                = accountEl.find('./act:name', Options.namespaces).text
         value, quantity                     = self.sumTransactionsForAccount(accountId, transctions) # value and quantity from gnucash xml
         commodityId                         = self.getCommodityId(accountId)
         commodityNamespace, commoditySymbol = self.getCommodityData(commodityId)

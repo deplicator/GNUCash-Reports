@@ -5,6 +5,9 @@
 
 import csv
 
+from App.Options import Options
+
+
 ## Create CSV
 # @brief Creates a CSV report from a ParseData object.
 class CreateCSV():
@@ -13,10 +16,9 @@ class CreateCSV():
     # @param[in]    reportObj       **List**, output from ParseData class, reports to create the CSV for.
     # @param[in]    options         **Object**, options from config file.
     # @param[in]    verbose         **Optional Boolean**, prints status when true.
-    def __init__(self, reportObj, options, verbose = False):
-        self.verbose = verbose
+    def __init__(self, reportObj, options):
 
-        if (self.verbose):
+        if (Options.verbose):
             print("    Creating {} CSV".format(options.ReportType))
 
         self.reports    = reportObj.report
