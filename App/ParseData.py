@@ -5,80 +5,16 @@
 
 from datetime import datetime, date
 
-from App.Options      import Options
-from App.AccountPaths import AccountPaths
+from App.Options             import Options
 
 
 ## Parse Data
-# @brief Turns GNUCashXML and options object into a data structure.
+# @brief Base class for other ParseData* classes.
 class ParseData():
 
-    ## Constructor
-    # @param[in]    namespaces          **Object**, namespaces used in GNUCash XML.
-    # @param[in]    options             **Object**, options from config file.
-    def __init__(self, options):
-
-        if (Options.verbose):
-            print("    Parsing Data")
-
-        self.accounts = options.Accounts
-
-        # A way to differentiate Asset Balance reports from the others. So far it's the only type
-        # of report that limits transactions with only and end date.
-        transactionWindow = True
-        if options.ReportType == 'Asset Balance':
-            transactionWindow = False
-
-        # Get a list of accounts to make report for.
-        self.accountPaths = AccountPaths(self.accounts)
-
-        # Build report object. List will be ordered by sets of start and end dates defined in the
-        # config file.
-        self.report = []
-
-        for i in range(0, len(options.Dates), 2):
-            startDate   = datetime.strptime(options.Dates[i], "%Y-%m-%d")
-            endDate     = datetime.strptime(options.Dates[i+1], "%Y-%m-%d")
-            transctions = self.limitTransactions(startDate, endDate, transactionWindow)
-
-            self.report.append({
-                'startDate'    : startDate,
-                'endDate'      : endDate,
-                'data'         : self.buildReport(transctions, endDate)
-            })
-
-
-    ## Create a list of transactions limited between dates.
-    # @param[in]    startDate       **DateTime Object**, beginning date for transaction window.
-    # @param[in]    endDate         **DateTime Object**, ending date for transaction window.
-    # @param[in]    window          **Optional Boolean**, if false the start date is ignored and the
-    #                               transaction window is from the beginning of the GNUCash file to
-    #                               the end date.
-    # @return                       **List** of XML object transactions between given dates.
-    def limitTransactions(self, startDate, endDate, window = True):
-
-        transactions = []
-
-        # Go through all transactions in the XML.
-        for transaction in Options.GNUCashXML.findall('.//gnc:transaction', Options.namespaces):
-
-            # Find the transaction date.
-            dateString = transaction.find('./trn:date-posted/ts:date', Options.namespaces).text
-            dateObject = datetime.strptime(dateString.split()[0], "%Y-%m-%d")
-
-            # Filter by dates.
-            # Asset Investment needs start and end date, it's interested in the balance change over
-            # the period. Asset Balance and Income Statements only need end date, they need totals
-            # for the accounts.
-            if (window):
-                if ((dateObject >= startDate) and (dateObject <= endDate)):
-                    transactions.append(transaction)
-
-            else:
-                if (dateObject <= endDate):
-                    transactions.append(transaction)
-
-        return transactions
+    ## Constructor - must be implemented in subclass.
+    def __init__(self):
+        raise NotImplementedError
 
 
     ## Sums transactions value and quantity for given account id.

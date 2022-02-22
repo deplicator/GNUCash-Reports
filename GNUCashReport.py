@@ -12,8 +12,9 @@ from types   import SimpleNamespace
 
 from App.Options import Options
 
-from App.ParseData               import ParseData
-from App.ParseDataAssetBalance   import ParseDataAssetBalance
+from App.ParseData_AssetBalance    import ParseData_AssetBalance
+from App.ParseData_AssetInvestment import ParseData_AssetInvestment
+from App.ParseData_IncomeStatement import ParseData_IncomeStatement
 
 from App.CreateCSV               import CreateCSV
 from App.CreateCSV_AssetCategory import CreateCSV_AssetCategory # This report type is unique.
@@ -77,15 +78,18 @@ def getConfigFile(options):
     assetBalanceOutput       = None if (not assetBalanceRunReport) else openOutputFile(config['ASSET']['balanceOutput'])
     assetCategoryOutput      = None if (not assetCategoryRunReport) else openOutputFile(config['ASSET']['categoryOutput'])
     assetInvestmentOutput    = None if (not assetInvestmentRunReport) else openOutputFile(config['ASSET']['investmentOutput'])
-    assetAccounts            = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(','))))
-    assetDepth               = int(config['ASSET']['depth']) if (int(config['ASSET']['depth'])) else None
+    assetAccounts            = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(',')[::2])))
+    assetDepths              = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(',')[1::2])))
+    assetDepths              = [int(numeric_string) for numeric_string in assetDepths]
+    assetExcluded            = [] if not config.has_option('ASSET', 'excluded') else list(filter(None, map(lambda account: account.strip(), config['ASSET']['excluded'].split(','))))
     assetDates               = list(filter(None, map(lambda date: date.strip(), config['ASSET']['dates'].split(','))))
 
     # Income Statement report options.
     incomeStatementRunReport  = config['INCOME STATEMENT'].getboolean('report')
     incomeStatementOutput     = None if (not incomeStatementRunReport) else openOutputFile(config['INCOME STATEMENT']['output'])
-    incomeStatementAccounts   = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(','))))
-    incomeStatementDepth      = int(config['INCOME STATEMENT']['depth']) if (int(config['INCOME STATEMENT']['depth'])) else None
+    incomeStatementAccounts   = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(',')[::2])))
+    incomeStatementDepth      = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(',')[1::2])))
+    incomeStatementDepth      = [int(numeric_string) for numeric_string in assetDepths]
     incomeStatementDates      = list(filter(None, map(lambda date: date.strip(), config['INCOME STATEMENT']['dates'].split(','))))
 
     # Some quick and simple error checking.
@@ -104,19 +108,22 @@ def getConfigFile(options):
                                                              RunReport  = assetBalanceRunReport,
                                                              OutputFile = assetBalanceOutput,
                                                              Accounts   = assetAccounts,
-                                                             Depth      = assetDepth,
+                                                             Depth      = assetDepths,
+                                                             Excluded   = assetExcluded,
                                                              Dates      = assetDates),
                            assetCategory   = SimpleNamespace(ReportType = 'Asset Category',
                                                              RunReport  = assetCategoryRunReport,
                                                              OutputFile = assetCategoryOutput,
                                                              Accounts   = assetAccounts,
-                                                             Depth      = assetDepth,
+                                                             Depth      = assetDepths,
+                                                             Excluded   = assetExcluded,
                                                              Dates      = assetDates),
                            assetInvestment = SimpleNamespace(ReportType = 'Asset Investment',
                                                              RunReport  = assetInvestmentRunReport,
                                                              OutputFile = assetInvestmentOutput,
                                                              Accounts   = assetAccounts,
-                                                             Depth      = assetDepth,
+                                                             Depth      = assetDepths,
+                                                             Excluded   = assetExcluded,
                                                              Dates      = assetDates),
                            incomeStatement = SimpleNamespace(ReportType = 'Income Statement',
                                                              RunReport  = incomeStatementRunReport,
@@ -189,43 +196,43 @@ if __name__ == '__main__':
     Options.set(opts)   # Make these things "global".
 
     #
-    # Run Asset Balance Report
+    # Run Asset Balance Report - Asset balance by accounts defined in GNUCash.
     #
     AssetBalanceObj = None
 
     if (Options.assetBalance.RunReport):
         if (Options.verbose):
-            print("== Running Asset Balance ==")
+            print("\n== Running Asset Balance ==")
 
-        AssetBalanceObj = ParseData(opts.assetBalance)
+        AssetBalanceObj = ParseData_AssetBalance()
 
         CreateCSV(AssetBalanceObj, opts.assetBalance)
 
     #
-    # Run Asset Values by Type Report
+    # Run Asset Values Report - Asset blances by security namespace defined in GNUCash.
     #
     AssetCategoryObj = None
 
     if (Options.assetCategory.RunReport):
         if (Options.verbose):
-            print("== Running Asset Category ==")
+            print("\n== Running Asset Category ==")
 
-        # Need asset balance to create asset category.
+        # Need asset balance data is used for both of these.
         if (None == AssetBalanceObj):
-            AssetBalanceObj = ParseData(opts.assetBalance)
+            AssetBalanceObj = ParseData_AssetBalance()
 
         CreateCSV_AssetCategory(AssetBalanceObj, opts.assetCategory)
 
     #
-    # Run Asset Investment Report
+    # Run Asset Investment Report - Amount invested into accounts between dates.
     #
     AssetInvestmentObj = None
 
     if (Options.assetInvestment.RunReport):
         if (Options.verbose):
-            print("== Running Asset Investment ==")
+            print("\n== Running Asset Investment ==")
 
-        AssetInvestmentObj = ParseData(opts.assetInvestment)
+        AssetInvestmentObj = ParseData_AssetInvestment()
 
         CreateCSV(AssetInvestmentObj, opts.assetInvestment)
 
@@ -236,8 +243,8 @@ if __name__ == '__main__':
 
     if (Options.incomeStatement.RunReport):
         if (Options.verbose):
-            print("== Running Income Statement ==")
+            print("\n== Running Income Statement ==")
 
-        IncomeStatementObj = ParseData(opts.incomeStatement)
+        IncomeStatementObj = ParseData_IncomeStatement()
 
         CreateCSV(IncomeStatementObj, opts.incomeStatement)

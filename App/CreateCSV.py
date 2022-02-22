@@ -15,7 +15,6 @@ class CreateCSV():
     ## Constructor
     # @param[in]    reportObj       **List**, output from ParseData class, reports to create the CSV for.
     # @param[in]    options         **Object**, options from config file.
-    # @param[in]    verbose         **Optional Boolean**, prints status when true.
     def __init__(self, reportObj, options):
 
         if (Options.verbose):
@@ -28,51 +27,69 @@ class CreateCSV():
         self.createFile()
 
 
-    ## Get header for single report.
-    # @brief Headers can change based on date range. Reconsiling the headers will allow leave an
-    #        account blank for a report when it didn't exist.
-    # @param[in]    report          **Object**, Data from report.
-    # @param[out]   headers         **Dictonary**, Headers to be created.
-    def getReportHeader(self, report, headers):
+    # Get number of children for current account at a certain depth.
+    # @param[in]    account         **Object**, An account from a report.
+    # @param[in]    depth           **Integer**, Depth to count children at
+    def countChildrenToDepth(self, account, depth):
+        if (account['level'] == depth):
+            return 1
 
-        # Loop through each account in report.
-        for account in report:
+        subcount = 0
+        if (account['level'] < depth):
+            for child in account['children']:
+                subcount += self.countChildrenToDepth(account['children'][child], depth)
+            return subcount
 
-            if (report[account]['level'] <= self.depth):
 
-                if (report[account]['level'] not in headers):
-                    headers[report[account]['level']] = []
-                    headers[report[account]['level']].append(report[account]['name'])
-                else:
-                    if (report[account]['name'] not in headers[report[account]['level']]):
-                        headers[report[account]['level']].append(report[account]['name'])
+    ## Make headers for report.
+    # @brief
+    # @param[in]    account         **Object**, An account from a report, first call is the top level account.
+    # @param[in]    depth           **Integer**, Depth for this report.
+    # @param[out]   headers         **Dictonary**, Represents headers to be created.
+    def makeHeaders(self, account, depth, headers):
 
-                if (report[account]['children']):
-                    self.getReportHeader(report[account]['children'], headers)
+        # Ignore children called below this depth.
+        if (account['level'] <= depth):
+
+            # New row
+            if (account['level'] not in headers):
+                headers[account['level']] = []
+
+            # New account
+            if (account['name'] not in headers[account['level']]):
+                headers[account['level']].append(account['name'])
+
+                # Add column and space for children if needed.
+                colWidth = self.countChildrenToDepth(account, depth) - 1;
+                for i in range(0, colWidth):
+                    headers[account['level']].append(None)
+
+            # Call again if this account has children.
+            if (account['children']):
+                for child in account['children']:
+                    self.makeHeaders(account['children'][child], depth, headers)
 
 
     ## Recursively sum total for single report
-    # @param[in]    report          **Object**, Data from report.
+    # @param[in]    account         **Object**, an account, first call is a top level account.
     # @param[in]    headers         **Dictonary**, Headers to use.
     # @param[in]    row             **String**, index for row.
-    def getTotals(self, report, headers, row):
+    def getTotals(self, account, headers, row, depth):
 
-        # Loop through each account in report.
-        for account in report:
-            accountdata = report[account]
+        # No totals to update, just call on children.
+        if (account['level'] < depth):
+            for child in account['children']:
+                self.getTotals(account['children'][child], headers, row, depth)
 
-            # No totals to update, just call on children.
-            if (accountdata['level'] < self.depth):
-                self.getTotals(accountdata['children'], headers, row)
+        # This is the depth for building out this row.
+        elif (account['level'] == depth):
 
-            # This is the depth for building out this row.
-            elif (accountdata['level'] == self.depth):
+            # Make sure this name is in the header, and get where it is.
+            index = headers.index(account['name'])
 
-                # Make sure this name is in the header, and get where it is.
-                index = headers.index(accountdata['name'])
-
-                # This will leave None's where this account is not in this batch of reports.
-                row[index] = accountdata['totalAccount']
+            # This will leave None's where this account is not in this batch of reports.
+            formattedAmount = '${:,.2f}'.format(account['totalAccount'])
+            row[index] = formattedAmount
 
 
     ## Creates CSV File.
@@ -82,54 +99,51 @@ class CreateCSV():
         # Build headers.
         #
         headers = {}
-        for report in self.reports:
-            self.getReportHeader(report['data'], headers)
+        for report in self.reports: # break report up by dates
+            for index, topLevelAccounts in enumerate(report['data']): # break report up by top level accounts
+                self.makeHeaders(report['data'][topLevelAccounts], self.depth[index], headers)
 
-        # Number of headers at the depth for report.
-        headerLen = len(headers[self.depth])
-
-        # The header will have a dictonary entry for all headers found in all reports above the
-        # display depth used. For now the sumary will only use the header at the display depth. It
-        # will look something like this: [subaccount1, subaccount2, subaccount3] and completely
-        # ignore parent accounts. The downside is it does not handle duplicates (which is possible
-        # as long as their parents paths are unique).
+        # Add empty column before each header row for date.
+        for each in headers:
+            headers[each].insert(0, None)
 
         #
         # Build rows
         #
         rows = {}
         for report in self.reports:
-
             # Use date as string so it looks nice in CSV.
             dateIndex = report['endDate'].strftime("%Y-%m-%d")
 
-            # Use report date as key for row.
-            rows[dateIndex] = [None for i in range(headerLen)]
+            # Use report date as key for row, create row with max length of header.
+            rows[dateIndex] = [None] * (len(headers[max(headers, key=headers.get)]) - 1)
+            rows[dateIndex].insert(0, dateIndex)
 
-            # Fill in totals for this row.
-            self.getTotals(report['data'],
-                           headers[self.depth],
-                           rows[dateIndex])
+            # Loop through topLevelAccounts
+            for index, topLevelAccounts in enumerate(report['data']):
+
+                # Fill in totals for this row.
+                self.getTotals(report['data'][topLevelAccounts],
+                               headers[self.depth[index]], # pass in the header for these topLevelAccounts
+                               rows[dateIndex],
+                               self.depth[index])
+
+# {0:                    [None, 'Assets', None, None, None, None, None, 'Liabilities'],
+#  1:                    [None, 'Investments',               None,     'Bank', 'Speculative Investments',             None,     None,        'Credit Card'],
+#  2:                    [None,    'Fidelity',         'Vanguard', 'Checking',                 'Bitcoin',         'Silver',    'Gold']}
+# {'2020-09-30': ['2020-09-30',       2523.96,        2581.175315,    2285.82,                 1557.6522,       767.437209,      0.0,             -758.33, None],
+#  '2021-10-31': ['2021-10-31',  10202.040042, 10514.049847999999,    10087.2,        13100.581000000002, 845.5634100000001, 1893.66, -21.020000000000003, None]}
 
         #
         # Write it to a CSV.
         #
         allRows = []
 
-        # Format header
-        headerRow = headers[self.depth]
-        headerRow.insert(0, None) # Insert blank in front (lines up with date).
-        allRows.append(headerRow)
+        for header in headers:
+            allRows.append(headers[header])
 
-        # Format rows
-        for each in rows:
-            totalRow = []
-            totalRow.append(each)
-            for amount in rows[each]:
-                formattedAmount = '${:,.2f}'.format(amount) # Format to display like currency.
-                totalRow.append(formattedAmount)
-
-            allRows.append(totalRow)
+        for row in rows:
+            allRows.append(rows[row])
 
         # Write it
         with open(self.outputFile, 'w', newline='', encoding='utf-8') as f:

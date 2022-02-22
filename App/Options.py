@@ -1,6 +1,11 @@
+##
+# @file
+# Holds Options class.
+#
 
 
-
+## Options
+# @brief Common data needed throughout the program. This class is not intended to be instantiated.
 class Options:
     config          = None
     input           = None
