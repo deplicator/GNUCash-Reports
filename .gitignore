@@ -3,6 +3,7 @@
 __pycache__
 output
 docs
+*.log
 
 !example_config.ini
 !example_accounts.gnucash

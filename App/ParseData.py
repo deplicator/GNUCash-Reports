@@ -5,11 +5,13 @@
 
 from datetime import datetime, date
 
-from App.Options             import Options
+from App.Options import Options
 
 
 ## Parse Data
-# @brief Base class for other ParseData* classes.
+# @brief Creates an object suitable for parsing data into a CSV. Balance uses
+# all data in the GNUCash file to the end date. Change is the same except it
+# only has data from the beginning to end date.
 class ParseData():
 
     ## Constructor - must be implemented in subclass.

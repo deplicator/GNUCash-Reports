@@ -1,6 +1,6 @@
 ##
 # @file
-# Parse Data Asset Investment class
+# Parse Data Account Changes class
 #
 
 from datetime import datetime, date
@@ -11,9 +11,11 @@ from App.Common.AccountPaths      import AccountPaths
 from App.Common.LimitTransactions import LimitTransactions
 
 
-## Parse Data - Asset Investment
-# @brief Turns GNUCashXML and options object into a data structure.
-class ParseData_AssetInvestment(ParseData):
+## Parse Data - Account Changes
+# @brief Turns GNUCashXML and options object into a data structure. The primary
+# difference between this and Balances structure is this one is limited to a
+# beginning date.
+class ParseData_Changes(ParseData):
 
     ## Constructor
     def __init__(self):
@@ -22,15 +24,15 @@ class ParseData_AssetInvestment(ParseData):
             print("    Parsing Data")
 
         # Get a list of accounts to make report for.
-        self.accountPaths = AccountPaths(Options.assetInvestment.Accounts)
+        self.accountPaths = AccountPaths(Options.accountChanges.Accounts)
 
         # Build report object. List will be ordered by sets of start and end dates defined in the
         # config file.
         self.report = []
 
-        for i in range(0, len(Options.assetInvestment.Dates), 2):
-            startDate   = datetime.strptime(Options.assetInvestment.Dates[i], "%Y-%m-%d")
-            endDate     = datetime.strptime(Options.assetInvestment.Dates[i+1], "%Y-%m-%d")
+        for i in range(0, len(Options.accountChanges.Dates), 2):
+            startDate   = datetime.strptime(Options.accountChanges.Dates[i], "%Y-%m-%d")
+            endDate     = datetime.strptime(Options.accountChanges.Dates[i+1], "%Y-%m-%d")
             transctions = LimitTransactions(endDate, startDate)
 
             self.report.append({

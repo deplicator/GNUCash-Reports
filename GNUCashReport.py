@@ -1,6 +1,6 @@
 ##
 # @file
-# Generates chosen reports from GNUCash file.
+# Generates reports from GNUCash file.
 #
 import argparse
 import configparser
@@ -12,9 +12,8 @@ from types   import SimpleNamespace
 
 from App.Options import Options
 
-from App.ParseData_AssetBalance    import ParseData_AssetBalance
-from App.ParseData_AssetInvestment import ParseData_AssetInvestment
-from App.ParseData_IncomeStatement import ParseData_IncomeStatement
+from App.ParseData_Balances import ParseData_Balance
+from App.ParseData_Changes  import ParseData_Changes
 
 from App.CreateCSV               import CreateCSV
 from App.CreateCSV_AssetCategory import CreateCSV_AssetCategory # This report type is unique.
@@ -23,8 +22,7 @@ from App.CreateCSV_AssetCategory import CreateCSV_AssetCategory # This report ty
 ## Get command line arguments.
 # @return                   Argparse object.
 def getArguments():
-    parser = argparse.ArgumentParser(description='Create simple asset balance reports from \
-                                                  uncompressed GNUCash file.')
+    parser = argparse.ArgumentParser(description='Create simple reports from an uncompressed GNUCash file.')
 
     parser.add_argument('-c', '--config',
                         required = True,
@@ -58,82 +56,78 @@ def openOutputFile(filePath):
 
 ## Get arguments from config file if -c option.
 # @param[in]    options     Config file object from argparse.
-# @return                   An object similar to the argparse object build from configparser.
+# @return                   An object with options for each report.
 def getConfigFile(options):
 
-    # Build the options from the config file.
+    print(options)
+
+    # Build options from the config file
     config = configparser.ConfigParser()
     config.read(options.config.name)
 
-    # Get the GNUCash XML file path.
-    input = open(config['OPTIONS']['input'], 'r')
+    # GNUCash XML file path
+    input = open(config['GENERAL']['input'], 'r')
 
-    # Do we want to see stuff in the terminal?
-    verbose = options.verbose or config['OPTIONS'].getboolean('verbose')
+    # Show output in terminal?
+    verbose = options.verbose or config['GENERAL'].getboolean('verbose')
 
-    # Asset Balance and Asset Investment report options.
-    assetBalanceRunReport    = config['ASSET'].getboolean('balanceReport')
-    assetCategoryRunReport   = config['ASSET'].getboolean('categoryReport')
-    assetInvestmentRunReport = config['ASSET'].getboolean('investmentReport')
-    assetBalanceOutput       = None if (not assetBalanceRunReport) else openOutputFile(config['ASSET']['balanceOutput'])
-    assetCategoryOutput      = None if (not assetCategoryRunReport) else openOutputFile(config['ASSET']['categoryOutput'])
-    assetInvestmentOutput    = None if (not assetInvestmentRunReport) else openOutputFile(config['ASSET']['investmentOutput'])
-    assetAccounts            = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(',')[::2])))
-    assetDepths              = list(filter(None, map(lambda account: account.strip(), config['ASSET']['accounts'].split(',')[1::2])))
-    assetDepths              = [int(numeric_string) for numeric_string in assetDepths]
-    assetExcluded            = [] if not config.has_option('ASSET', 'excluded') else list(filter(None, map(lambda account: account.strip(), config['ASSET']['excluded'].split(','))))
-    assetDates               = list(filter(None, map(lambda date: date.strip(), config['ASSET']['dates'].split(','))))
+    # Which reports to run
+    runAccountBalances  = config['GENERAL'].getboolean('accountBalances')
+    runAccountChanges   = config['GENERAL'].getboolean('accountChanges')
+    runAssetsByCategory = config['GENERAL'].getboolean('assetsByCategory')
+    runIncomeStatement  = config['GENERAL'].getboolean('incomeStatment')
 
-    # Income Statement report options.
-    incomeStatementRunReport  = config['INCOME STATEMENT'].getboolean('report')
-    incomeStatementOutput     = None if (not incomeStatementRunReport) else openOutputFile(config['INCOME STATEMENT']['output'])
-    incomeStatementAccounts   = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(',')[::2])))
-    incomeStatementDepth      = list(filter(None, map(lambda account: account.strip(), config['INCOME STATEMENT']['accounts'].split(',')[1::2])))
-    incomeStatementDepth      = [int(numeric_string) for numeric_string in assetDepths]
-    incomeStatementDates      = list(filter(None, map(lambda date: date.strip(), config['INCOME STATEMENT']['dates'].split(','))))
+    # Where to save report CSVs
+    accountBalancesOutput  = openOutputFile(config['GENERAL']['accountBalancesOutput'])  if (runAccountBalances)  else None
+    accountChangesOutput   = openOutputFile(config['GENERAL']['accountChangesOutput'])   if (runAccountChanges)   else None
+    assetsByCategoryOutput = openOutputFile(config['GENERAL']['assetsByCategoryOutput']) if (runAssetsByCategory) else None
+    incomeStatementOutput  = openOutputFile(config['GENERAL']['incomeStatmentOutput'])   if (runIncomeStatement)  else None
 
-    # Some quick and simple error checking.
-    if (len(assetDates) %2 != 0):
-        print("Unexpected number of dates in config file under [ASSET], they should be in pairs.")
+    # Report dates, should be in pairs
+    reportDates = list(filter(None, map(lambda date: date.strip(), config['GENERAL']['dates'].split(','))))
+    if (len(reportDates) %2 != 0):
+        print("Unexpected number of dates in config file, they should be in pairs.")
         sys.exit()
 
-    if (len(incomeStatementDates) %2 != 0):
-        print("Unexpected number of dates in config file under [INCOME STATEMENT], they should be in pairs.")
-        sys.exit()
+    # Balance report account paths
+    assetAccounts = list(filter(None, map(lambda account: account.strip(), config['BALANCE REPORTS']['accounts'].split(',')[::2])))
+    assetDepths   = list(filter(None, map(lambda account: account.strip(), config['BALANCE REPORTS']['accounts'].split(',')[1::2])))
+    assetDepths   = [int(numeric_string) for numeric_string in assetDepths]
+
+    # Income report account paths
+    incomeAccounts   = list(filter(None, map(lambda account: account.strip(), config['INCOME REPORTS']['accounts'].split(',')[::2])))
+    incomeDepth      = list(filter(None, map(lambda account: account.strip(), config['INCOME REPORTS']['accounts'].split(',')[1::2])))
+    incomeDepth      = [int(numeric_string) for numeric_string in incomeDepth]
 
     return SimpleNamespace(config          = options.config,
                            input           = input,
                            verbose         = verbose,
-                           assetBalance    = SimpleNamespace(ReportType = 'Asset Balance',
-                                                             RunReport  = assetBalanceRunReport,
-                                                             OutputFile = assetBalanceOutput,
-                                                             Accounts   = assetAccounts,
-                                                             Depth      = assetDepths,
-                                                             Excluded   = assetExcluded,
-                                                             Dates      = assetDates),
-                           assetCategory   = SimpleNamespace(ReportType = 'Asset Category',
-                                                             RunReport  = assetCategoryRunReport,
-                                                             OutputFile = assetCategoryOutput,
-                                                             Accounts   = assetAccounts,
-                                                             Depth      = assetDepths,
-                                                             Excluded   = assetExcluded,
-                                                             Dates      = assetDates),
-                           assetInvestment = SimpleNamespace(ReportType = 'Asset Investment',
-                                                             RunReport  = assetInvestmentRunReport,
-                                                             OutputFile = assetInvestmentOutput,
-                                                             Accounts   = assetAccounts,
-                                                             Depth      = assetDepths,
-                                                             Excluded   = assetExcluded,
-                                                             Dates      = assetDates),
-                           incomeStatement = SimpleNamespace(ReportType = 'Income Statement',
-                                                             RunReport  = incomeStatementRunReport,
-                                                             OutputFile = incomeStatementOutput,
-                                                             Accounts   = incomeStatementAccounts,
-                                                             Depth      = incomeStatementDepth,
-                                                             Dates      = incomeStatementDates),
+                           accountBalances  = SimpleNamespace(ReportType = 'Account Balances',
+                                                              RunReport  = runAccountBalances,
+                                                              OutputFile = accountBalancesOutput,
+                                                              Accounts   = assetAccounts,
+                                                              Depth      = assetDepths,
+                                                              Dates      = reportDates),
+                           accountChanges   = SimpleNamespace(ReportType = 'Account Changes',
+                                                              RunReport  = runAccountChanges,
+                                                              OutputFile = accountChangesOutput,
+                                                              Accounts   = assetAccounts,
+                                                              Depth      = assetDepths,
+                                                              Dates      = reportDates),
+                           assetsByCategory = SimpleNamespace(ReportType = 'Assets by Category',
+                                                              RunReport  = runAssetsByCategory,
+                                                              OutputFile = assetsByCategoryOutput,
+                                                              Accounts   = assetAccounts,
+                                                              Depth      = assetDepths,
+                                                              Dates      = reportDates),
+                           incomeStatement  = SimpleNamespace(ReportType = 'Income Statement',
+                                                              RunReport  = runIncomeStatement,
+                                                              OutputFile = incomeStatementOutput,
+                                                              Accounts   = incomeAccounts,
+                                                              Depth      = incomeDepth,
+                                                              Dates      = reportDates),
                            GNUCashXML = getParsedXML(input.name),
-                           namespaces = getNamespaces()
-                                                             )
+                           namespaces = getNamespaces() )
 
 
 ## Returns the GNUCash XML as an ElementTree object.
@@ -193,58 +187,33 @@ if __name__ == '__main__':
     # Report options set by commonad line and/or config file.
     opts = getArguments()
     opts = getConfigFile(opts)
-    Options.set(opts)   # Make these things "global".
+    Options.set(opts)   # Make these "global".
 
-    #
-    # Run Asset Balance Report - Asset balance by accounts defined in GNUCash.
-    #
-    AssetBalanceObj = None
+    # Obj contains GNUCash data from use beginnig of file to end date.
+    BalanceObj = None
+    if (opts.accountBalances.RunReport or opts.assetsByCategory.RunReport):
+        BalanceObj = ParseData_Balance(opts.accountBalances.Accounts)
 
-    if (Options.assetBalance.RunReport):
-        if (Options.verbose):
-            print("\n== Running Asset Balance ==")
+    # Create Account Balances report
+    if (opts.accountBalances.RunReport):
+        if (opts.verbose):
+            print("\n== Running Account Balances ==")
+        CreateCSV(BalanceObj, opts.accountBalances)
 
-        AssetBalanceObj = ParseData_AssetBalance()
+    # Create Account Changes report, uses begining and end date.
+    if (opts.accountChanges.RunReport):
+        if (opts.verbose):
+            print("\n== Running Account Changes ==")
+        CreateCSV(ParseData_Changes(), opts.accountChanges)
 
-        CreateCSV(AssetBalanceObj, opts.assetBalance)
+    # Create Assets by Category report
+    if (opts.assetsByCategory.RunReport):
+        if (opts.verbose):
+            print("\n== Running Assets by Category ==")
+        CreateCSV_AssetCategory(BalanceObj, opts.assetsByCategory)
 
-    #
-    # Run Asset Values Report - Asset blances by security namespace defined in GNUCash.
-    #
-    AssetCategoryObj = None
-
-    if (Options.assetCategory.RunReport):
-        if (Options.verbose):
-            print("\n== Running Asset Category ==")
-
-        # Need asset balance data is used for both of these.
-        if (None == AssetBalanceObj):
-            AssetBalanceObj = ParseData_AssetBalance()
-
-        CreateCSV_AssetCategory(AssetBalanceObj, opts.assetCategory)
-
-    #
-    # Run Asset Investment Report - Amount invested into accounts between dates.
-    #
-    AssetInvestmentObj = None
-
-    if (Options.assetInvestment.RunReport):
-        if (Options.verbose):
-            print("\n== Running Asset Investment ==")
-
-        AssetInvestmentObj = ParseData_AssetInvestment()
-
-        CreateCSV(AssetInvestmentObj, opts.assetInvestment)
-
-    #
-    # Run Income Statement Report
-    #
-    IncomeStatementObj = None
-
-    if (Options.incomeStatement.RunReport):
-        if (Options.verbose):
+    # Create Income Statement report
+    if (opts.incomeStatement.RunReport):
+        if (opts.verbose):
             print("\n== Running Income Statement ==")
-
-        IncomeStatementObj = ParseData_IncomeStatement()
-
-        CreateCSV(IncomeStatementObj, opts.incomeStatement)
+        CreateCSV(ParseData_Balance(opts.incomeStatement.Accounts), opts.incomeStatement)
