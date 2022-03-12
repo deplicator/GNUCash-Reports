@@ -41,12 +41,11 @@ class CreateCSV():
             return subcount
 
 
-    ## Make headers for report.
-    # @brief
+    ## The recursive part of creating the headers
     # @param[in]    account         **Object**, An account from a report, first call is the top level account.
     # @param[in]    depth           **Integer**, Depth for this report.
     # @param[out]   headers         **Dictonary**, Represents headers to be created.
-    def makeHeaders(self, account, depth, headers):
+    def createAccountHeaders(self, account, depth, headers):
 
         # Ignore children called below this depth.
         if (account['level'] <= depth):
@@ -60,17 +59,32 @@ class CreateCSV():
                 headers[account['level']].append(account['name'])
 
                 # Add column and space for children if needed.
-                colWidth = self.countChildrenToDepth(account, depth) - 1;
+                colWidth = self.countChildrenToDepth(account, depth) - 1
                 for i in range(0, colWidth):
                     headers[account['level']].append(None)
 
             # Call again if this account has children.
             if (account['children']):
                 for child in account['children']:
-                    self.makeHeaders(account['children'][child], depth, headers)
+                    self.createAccountHeaders(account['children'][child], depth, headers)
 
 
-    ## Recursively sum total for single report
+    ## Creates the CSV Headers
+    def createHeaders(self):
+        headers = {}
+        for report in self.reports: # break report up by dates
+            for index, topLevelAccounts in enumerate(report['data']): # break report up by top level accounts
+                self.createAccountHeaders(report['data'][topLevelAccounts], self.depth[index], headers)
+
+        # Add empty column before each header row for date.
+        for each in headers:
+            headers[each].insert(0, None)
+        
+        return headers
+
+
+    ## Sum total for single report
+    # @brief The recursive part of creating rows.
     # @param[in]    account         **Object**, an account, first call is a top level account.
     # @param[in]    headers         **Dictonary**, Headers to use.
     # @param[in]    row             **String**, index for row.
@@ -92,31 +106,15 @@ class CreateCSV():
             row[index] = formattedAmount
 
 
-    ## Creates CSV File.
-    def createFile(self):
-
-        #
-        # Build headers.
-        #
-        headers = {}
-        for report in self.reports: # break report up by dates
-            for index, topLevelAccounts in enumerate(report['data']): # break report up by top level accounts
-                self.makeHeaders(report['data'][topLevelAccounts], self.depth[index], headers)
-
-        # Add empty column before each header row for date.
-        for each in headers:
-            headers[each].insert(0, None)
-
-        #
-        # Build rows
-        #
+    ## Create the CSV Rows
+    def createRows(self):
         rows = {}
         for report in self.reports:
             # Use date as string so it looks nice in CSV.
             dateIndex = report['endDate'].strftime("%Y-%m-%d")
 
             # Use report date as key for row, create row with max length of header.
-            rows[dateIndex] = [None] * (len(headers[max(headers, key=headers.get)]) - 1)
+            rows[dateIndex] = [None] * (len(self.headers[max(self.headers, key=self.headers.get)]) - 1)
             rows[dateIndex].insert(0, dateIndex)
 
             # Loop through topLevelAccounts
@@ -124,23 +122,23 @@ class CreateCSV():
 
                 # Fill in totals for this row.
                 self.getTotals(report['data'][topLevelAccounts],
-                               headers[self.depth[index]], # pass in the header for these topLevelAccounts
+                               self.headers[self.depth[index]], # pass in the header for these topLevelAccounts
                                rows[dateIndex],
                                self.depth[index])
+        return rows
 
-# {0:                    [None, 'Assets', None, None, None, None, None, 'Liabilities'],
-#  1:                    [None, 'Investments',               None,     'Bank', 'Speculative Investments',             None,     None,        'Credit Card'],
-#  2:                    [None,    'Fidelity',         'Vanguard', 'Checking',                 'Bitcoin',         'Silver',    'Gold']}
-# {'2020-09-30': ['2020-09-30',       2523.96,        2581.175315,    2285.82,                 1557.6522,       767.437209,      0.0,             -758.33, None],
-#  '2021-10-31': ['2021-10-31',  10202.040042, 10514.049847999999,    10087.2,        13100.581000000002, 845.5634100000001, 1893.66, -21.020000000000003, None]}
 
-        #
-        # Write it to a CSV.
-        #
+    ## Creates CSV File.
+    def createFile(self):
+
+        self.headers = self.createHeaders()
+        rows = self.createRows()
+
+        # Write it all to a CSV.
         allRows = []
 
-        for header in headers:
-            allRows.append(headers[header])
+        for header in self.headers:
+            allRows.append(self.headers[header])
 
         for row in rows:
             allRows.append(rows[row])
